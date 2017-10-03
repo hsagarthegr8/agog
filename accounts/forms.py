@@ -13,7 +13,7 @@ class UserCreationForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('date_of_birth',)
+        fields = ('username', 'first_name', 'last_name', 'email', 'gender', 'date_of_birth',)
 
     def clean_password2(self):
         # Check that the two password entries match
@@ -47,3 +47,12 @@ class UserChangeForm(forms.ModelForm):
         # This is done here, rather than on the field, because the
         # field does not have access to the initial value
         return self.initial["password"]
+
+    def get_ratings(self):
+        return self.userrating_set.aggregate(models.Avg('rating'))['rating__avg']
+
+    def get_count(self):
+        return self.userrating_set.all().count()
+
+    def get_posts(self):
+        return (self.post_set.all() | self.posted_on_set.all()).distinct()

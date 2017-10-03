@@ -88,3 +88,12 @@ class User(AbstractBaseUser):
         "Is the user a member of staff?"
         # Simplest possible answer: All admins are staff
         return self.is_admin
+
+    def get_ratings(self):
+        return self.userrating_set.aggregate(models.Avg('rating'))['rating__avg']
+
+    def get_count(self):
+        return self.userrating_set.all().count()
+
+    def get_posts(self):
+        return (self.post_set.all() | self.posted_on_set.all()).distinct()

@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    </head>
+
+    <body>
+        {% include 'snippets/nav.html' %}
+        <div class ="container">
+            {% block content %}
+            {% endblock %}
+        </div>
+
+        {% include 'snippets/js.html' %}
+    </body>
+</html>

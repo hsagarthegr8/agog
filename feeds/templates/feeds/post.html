@@ -1,0 +1,36 @@
+{% for post in posts %}
+    <div class="panel panel-default post" style="padding: 10px 10px 10px 10px; margin-top:20px">
+        <div class="panel-heading">
+            {% if post.posted_by == user and post.posted_on == user%}
+                <strong>You</strong> have posted on your timeline.
+            {% elif post.posted_by == user  %}
+                <strong>You</strong> have posted on <strong>{{ post.posted_on.username }}</strong>.
+            {% elif post.posted_on == user %}
+                <strong>{{ post.posted_by.username }}</strong> has posted on your timeline.
+            {% endif %}<div class="text-right"><small>{{ post.timestamp }}</small></div></div>
+        <div class="panel-body">{{ post.message }}</div>
+        <div class="panel-footer">
+            rated {{ post.get_ratings }} by {{ post.get_count}} user{{ post.get_count|pluralize }}
+            <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#{{ post.id }}comment">Comments</button>
+        </div>
+    </div>
+    <div class="panel panel-default panel-collapse collapse" id = "{{ post.id }}comment" style="padding: 10px 10px 10px 10px; margin-top:0px " >
+    <ul>
+    {% for comment in post.comment_set.all %}
+        <li>{{ comment.comment }} commented by <b>{{ comment.commented_by }}</b> at {{ comment.timestamp }}</li>
+    {% empty %}
+        No comments
+    {% endfor %}
+    </ul>
+    <form target="#">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Add a new comment">
+            <div class="input-group-btn">
+                <button class="btn btn-default" type="submit">
+                    Add
+                </button>
+            </div>
+        </div>
+    </form>
+    </div>
+{% endfor %}

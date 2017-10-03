@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ object.username }}{% endblock %}
+
+{% block home_active %}active{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="panel panel-default" style="padding: 20px 20px 20px 20px">
+                <div class="panel-body"><h2>{{ object.get_full_name }}</h2></div>
+                <div class="panel-footer">rated {{ object.get_ratings }} by {{ object.get_count}} user{{ object.get_count|pluralize }}</div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="post">Add a new post:</label>
+                <textarea class="form-control" id="post" rows = "5"></textarea>
+            </div>
+            <div class="panel-group">
+                {% include 'feeds/post.html' with posts=object.get_posts %}
+            </div>
+        </div>
+        <div class="col-sm-3">Notifications</div>
+    </div>
+{% endblock %}
