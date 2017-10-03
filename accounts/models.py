@@ -98,3 +98,12 @@ class User(AbstractBaseUser):
 
     def get_posts(self):
         return (self.post_set.all() | self.posted_on_set.all()).distinct()
+
+    def get_timeline_posts(self):
+        pass
+
+    def get_connections(self):
+        return (self.connection2_set.all() | self.connections_set.all()).distinct()
+
+    def get_absolute_url(self):
+        return '/profile/{}/'.format(self.username)

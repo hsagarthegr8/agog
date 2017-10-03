@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="panel panel-default">
+        <p class="text-center h1">
+            {{ object.get_full_name }}
+        </p>
+        <a class="viewsitelink " href="{% url 'profiles:profile' username=object.username  %}"><p class="text-center">
+            @{{ object.username }}</p></a>
+    </div>
+    <hr>
+    <div class="panel panel-default">
+        <h2 class="text-center">About</h2>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">Connections</div>
+                <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        {% for connection in object.get_connections %}
+                        {% if connection.user1 == object %}
+                            <a href="{{ connection.user2.get_absolute_url }}">{{ connection.user2.get_full_name }}</a>
+                        {% else %}
+                            <a href="{{ connection.user1.get_absolute_url }}">{{ connection.user1.get_full_name }}</a>
+                        {% endif %}
+                    {% endfor %}
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            {% include 'feeds/post.html' with posts=object.get_posts %}
+        </div>
+        <div class="col-sm-3">Notifications</div>
+    </div>
+{% endblock %}
