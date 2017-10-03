@@ -1,14 +1,21 @@
+
 {% extends 'base.html' %}
 
 {% block title %}{{ object.username }}{% endblock %}
 
 {% block home_active %}active{% endblock %}
-
+{% load static %}
 {% block content %}
     <div class="row">
         <div class="col-sm-3">
             <div class="panel panel-default" style="padding: 20px 20px 20px 20px">
-                <div class="panel-body"><h2><a href="{% url 'profiles:profile' username=object.username %}">{{ object.get_full_name }}</a></h2></div>
+                <div class="panel-body text-center">
+                    {% if object.gender == "M" %}
+                        <img class="img-circle" src="{% static 'profiles/avatars/male.svg' %}" style="width: 150px ; height: 150px ; border:solid 1px" />
+                    {% else %}
+                        <img class="img-circle" src="{% static 'profiles/avatars/female.svg' %}" style="width: 150px ; height: 150px ; border:solid 1px" />
+                    {% endif %}
+                    <h3><a href="{% url 'profiles:profile' username=object.username %}">{{ object.get_full_name }}</a></h3></div>
                 <div class="panel-footer">rated {{ object.get_ratings }} by {{ object.get_count}} user{{ object.get_count|pluralize }}</div>
             </div>
         </div>
