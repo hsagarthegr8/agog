@@ -1,8 +1,4 @@
-<div class="form-group">
-    <label for="post">Add a new post:</label>
-    <textarea class="form-control" id="post" rows = "5"></textarea>
-</div>
-
+{% include 'feeds/add_post_form.html' %}
 <div class="panel-group">
     {% for post in posts %}
         <div class="panel panel-default post" style="margin-top:20px">
@@ -41,16 +37,7 @@
             No comments
         {% endfor %}
         </ul>
-        <form target="#">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Add a new comment">
-                <div class="input-group-btn">
-                    <button class="btn btn-default" type="submit">
-                        Add
-                    </button>
-                </div>
-            </div>
-        </form>
+        {% include 'feeds/add_comment_form.html' %}
         </div>
     {% empty %}
         No post to show

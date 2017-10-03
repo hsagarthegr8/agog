@@ -46,7 +46,7 @@
             </div>
         </div>
         <div class="col-sm-6">
-            {% include 'feeds/post.html' with posts=object.get_posts %}
+            {% include 'feeds/post.html' with posts=object.get_posts redirect_to='profile' %}
         </div>
         <div class="col-sm-3">Notifications</div>
     </div>

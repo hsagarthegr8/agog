@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+{% for object in object_list %}
+
+    {% if object.gender == "M" %}
+            <img class="img-circle" src="{% static 'profiles/avatars/male.svg' %}" style="width: 100px ; height: 100px ; border:solid 1px" />
+        {% else %}
+            <img class="img-circle" src="{% static 'profiles/avatars/female.svg' %}" style="width: 100px ; height: 100px ; border:solid 1px" />
+        {% endif %}
+    <a href="{% url 'profiles:profile' object.username %}">{{ object.full_name }}</a>
+
+{% endfor %}
+{% endblock %}
