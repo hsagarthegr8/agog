@@ -1,7 +1,10 @@
 from django.db import models
+from django.db.models import Q
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser
 )
+
+from feeds.models import Post
 
 
 class MyUserManager(BaseUserManager):
@@ -99,11 +102,17 @@ class User(AbstractBaseUser):
     def get_posts(self):
         return (self.post_set.all() | self.posted_on_set.all()).distinct()
 
-    def get_timeline_posts(self):
-        pass
-
     def get_connections(self):
-        return (self.connection2_set.all() | self.connections_set.all()).distinct()
+        my_connections = set()
+        my_connections.add(self)
+        for connection in (self.connections_set.all() | self.connection2_set.all()):
+            my_connections.add(connection.user1)
+            my_connections.add(connection.user2)
+        return my_connections
+
+    def get_timeline_posts(self):
+        my_connections = self.get_connections()
+        return Post.objects.filter(Q(posted_by__in=my_connections), Q(posted_on__in=my_connections))
 
     def get_absolute_url(self):
         return '/profile/{}/'.format(self.username)
