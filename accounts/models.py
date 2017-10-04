@@ -1,10 +1,14 @@
 from django.db import models
 from django.db.models import Q
+from django.db.models.signals import post_save
+from django.shortcuts import reverse
+from django.dispatch import receiver
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser
 )
 
 from feeds.models import Post
+from .emails import ActivationEmail
 
 
 class MyUserManager(BaseUserManager):
@@ -61,6 +65,7 @@ class User(AbstractBaseUser):
     date_joined = models.DateField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
+    is_verified = models.BooleanField(default=False)
 
     objects = MyUserManager()
 
@@ -121,3 +126,38 @@ class User(AbstractBaseUser):
 
     def get_absolute_url(self):
         return '/profile/{}/'.format(self.username)
+
+
+from django.utils.crypto import get_random_string
+
+
+class Verification(models.Model):
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
+    activation_key = models.CharField(max_length=100, null=True)
+
+    def __str__(self):
+        return self.user.username
+
+    def get_activation_key(self):
+        return get_random_string(length=100)
+
+    def save(self, *args, **kwargs):
+        self.activation_key = self.get_activation_key()
+        super(Verification, self).save(*args, **kwargs)
+
+    def send(self):
+        activation_url = reverse('accounts:activate', kwargs={'username': self.user.username,
+                                                              'activation_key': self.activation_key})
+        context = {'username':self.user.username, 'activation_url' : activation_url}
+        ActivationEmail(to = [self.user.email], url=activation_url).send()
+
+
+
+@receiver(post_save, sender=User)
+def save_profile(sender, instance, **kwargs):
+    if not instance.is_verified:
+        Verification.objects.create(user=instance)
+
+@receiver(post_save, sender=Verification)
+def send_activation_email(sender, instance, **kwargs):
+    instance.send()
