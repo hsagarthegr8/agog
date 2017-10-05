@@ -14,7 +14,21 @@
         <a class="viewsitelink " href="{% url 'profiles:profile' username=object.username  %}">
             <p>@{{ object.username }}</p>
         </a>
-        <p>rated {{ object.get_ratings }} by {{ object.get_count}} user{{ object.get_count|pluralize }}</p>
+        <p>
+            rated {{ object.get_ratings }} by {{ object.get_count}} user{{ object.get_count|pluralize }}
+            {% if request.user != object %}
+                {% if request.user in object.get_request_user %}
+                    <button class="btn btn-info disabled" type="button">Awaiting Confirmation</button>
+                {% elif request.user in object.get_connections %}
+                    <button class="btn btn-info" type="button">Already Connected</button>
+                {% else %}
+                    <a href="{% url 'profiles:new_request' username=object.username %}">
+                        <button class="btn btn-info" type="button">Add Connection</button>
+                    </a>
+                {% endif %}
+            {% endif %}
+        </p>
+
     </div>
     <hr>
     <div class="panel panel-default">
@@ -48,6 +62,10 @@
         <div class="col-sm-6">
             {% include 'feeds/post.html' with posts=object.get_posts redirect_to='profile' %}
         </div>
-        <div class="col-sm-3">Notifications</div>
+        <div class="col-sm-3">
+            {% if request.user == object %}
+                {% include 'profiles/snippets/notifications.html' %}
+            {% endif %}
+        </div>
     </div>
 {% endblock %}

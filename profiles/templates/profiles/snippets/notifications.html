@@ -1,0 +1,25 @@
+<div class="panel panel-default">
+    <ul class="nav nav-tabs nav-justified">
+        <li class="active"><a data-toggle="tab" href="#notify">Notifications</a></li>
+        <li><a data-toggle="tab" href="#connections">Requests</a></li>
+    </ul>
+    <div class="panel-body">
+        <div class="tab-content">
+            <div id="notify" class="tab-pane fade in active">
+                <h3>Notifications</h3>
+                <p>Some content.</p>
+            </div>
+            <div id="connections" class="tab-pane fade">
+                {% for conn in object.get_requests %}
+                    <a href="{% url 'profiles:profile' username=conn.user1.username %}">{{ conn.user1.full_name }}</a> sent you a connection request.<br/>
+                    <a href="{% url 'profiles:accept_request' id=conn.id %}"><button type="button">Accept</button></a>
+                    <a href="{% url 'profiles:delete_request' id=conn.id %}"><button type="button">Reject</button></a>
+
+                {% empty %}
+                    No new Requests
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+</div>

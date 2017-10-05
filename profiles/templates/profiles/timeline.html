@@ -22,6 +22,8 @@
         <div class="col-sm-6">
             {% include 'feeds/post.html' with posts=object.get_timeline_posts redirect_to='timeline' %}
         </div>
-        <div class="col-sm-3">Notifications</div>
+        <div class="col-sm-3">
+            {% include 'profiles/snippets/notifications.html' %}
+        </div>
     </div>
 {% endblock %}

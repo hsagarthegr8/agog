@@ -122,3 +122,5 @@ db.sqlite3
 !accounts/migrations/0001_initial.py
 
 staticfiles/
+
+.fuse_hidden000000f000000005

@@ -115,10 +115,21 @@ class User(AbstractBaseUser):
     def get_connections(self):
         my_connections = set()
         my_connections.add(self)
-        for connection in (self.connections_set.all() | self.connection2_set.all()):
+        for connection in (self.connections_set.filter(is_active=True) | self.connection2_set.filter(is_active=True)):
             my_connections.add(connection.user1)
             my_connections.add(connection.user2)
         return my_connections
+
+    def get_requests(self):
+        requests = self.connection2_set.filter(is_active=False)
+        return requests
+
+    def get_request_user(self):
+        a = set()
+        for conn in self.get_requests():
+            a.add(conn.user1)
+        return a
+
 
     def get_timeline_posts(self):
         my_connections = self.get_connections()
@@ -133,7 +144,7 @@ from django.utils.crypto import get_random_string
 
 class Verification(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
-    activation_key = models.CharField(max_length=100, null=True)
+    activation_key = models.CharField(max_length=100, null=True,blank=True)
 
     def __str__(self):
         return self.user.username
@@ -152,12 +163,17 @@ class Verification(models.Model):
         ActivationEmail(to = [self.user.email], url=activation_url).send()
 
 
-
+'''
 @receiver(post_save, sender=User)
 def save_profile(sender, instance, **kwargs):
     if not instance.is_verified:
-        Verification.objects.create(user=instance)
+        v = Verification()
+        v.user = instance
+        v.save()
+'''
 
+'''
 @receiver(post_save, sender=Verification)
 def send_activation_email(sender, instance, **kwargs):
     instance.send()
+'''
