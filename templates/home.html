@@ -1,35 +1,43 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>AGOG-A platform for friends and family</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{% static 'home.css' %}"/>
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <title>AGOG-A platform for friends and family</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{% static 'home.css' %}"/>
+    </head>
+    <body>
+        <div class="body">
+            <nav class="navbar navbar-inverse mynav">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#">Agog</a>
+                    </div>
+                    <form class="navbar-form navbar-right" method="post" action="{% url 'accounts:loginit' %}">
+                        <div class="form-group">
+                            {% csrf_token %}
+                            <input class="form-control form-input" type="text" placeholder="Username/Email" required="required" name="username">
+                            <input class="form-control form-input" type="password" placeholder="Password" required="required" name="password">
+                        </div>
+                        <button type="submit" class="btn btn-sucbcess">Login</button>
+                        <button type="button" class="btn btn-info forgot">Forgot Password</button>
+                    </form>
+                </div>
+            </nav>
 
- <nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">WebSiteName</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
-      <li><a href="#">Page 1</a></li>
-      <li><a href="#">Page 2</a></li>
-    </ul>
+            <div class="row">
+                <div class="col-sm-8"></div>
+                <!--<div class="col-sm-4">
+                    <table class="table borderless">
+                        <tbody>
+                        {{ form.as_table }}
+                        </tbody>
+                    </table>
+                </div>-->
+            </div>
 
-    <form class="navbar-form navbar-right">
-      <div class="form-group">
-        <input class="form-control" type="text" placeholder="email/username" required="required" name="username">
-        <input class="form-control" type="password" placeholder="Password" required="required" name="password">
-      </div>
-      <button type="submit" class="btn btn-sucbcess">Login</button>
-        <button type="button" class="btn btn-info">Forgot Password</button>
-    </form>
-  </div>
-</nav>
-</body>
+        </div>
+    </body>
 </html>
