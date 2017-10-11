@@ -16,11 +16,6 @@ class Post(models.Model):
     def __str__(self):
         return self.posted_by.username +' - '+ self.message
 
-    def get_ratings(self):
-        return self.postrating_set.aggregate(models.Avg('rating'))['rating__avg']
-
-    def get_count(self):
-        return self.postrating_set.all().count()
 
 
 class Comment(models.Model):
@@ -34,10 +29,27 @@ class Comment(models.Model):
         return str(self.post) +' - '+ self.commented_by.username +' - ' + self.comment
 
 
-class PostRating(models.Model):
-    post = models.ForeignKey(Post,on_delete=models.CASCADE)
-    rated_by = models.ForeignKey(User,on_delete=models.CASCADE)
-    rating = models.SmallIntegerField()
+class PostReactions(models.Model):
+    CHOICES = (('A','Angry'),
+               ('S','Sad'),
+               ('W','Wow'),
+               ('H','Haha'),
+               ('L','Love'))
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    reacted_by = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
-        unique_together = ('post','rated_by')
+        unique_together = ['post','reacted_by']
+
+
+class CommentReactions(models.Model):
+    CHOICES = (('A','Angry'),
+               ('S','Sad'),
+               ('W','Wow'),
+               ('H','Haha'),
+               ('L','Love'))
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
+    reacted_by = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ['comment','reacted_by']
