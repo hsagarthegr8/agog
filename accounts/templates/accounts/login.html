@@ -3,14 +3,29 @@
 {% block title %}{{ block.super }} - Login{% endblock %}
 
 {% block content %}
-    <h1>Login Here</h1>
-    <form method="post" >
+    <h2>Login Here</h2>
+    <form method="post">
+        {{ form.non_field_errors }}
         {% csrf_token %}
-        {{ form.as_p }}
-        <input type="reset" class="btn btn-info" value="Reset">
-        <input type="submit" class="btn btn-info" value="Login Now">
+        <fieldset class="form-group">
+            <div class="row">
+            <div class="col-sm-2">{{ form.username.label_tag }}</div>
+            <div class="col-sm-3">{{ form.username }}</div>
+            </div>
+        </fieldset>
+        <fieldset class="form-group">
+            <div class="row">
+            <div class="col-sm-2">{{ form.password.label_tag }}</div>
+            <div class="col-sm-3">{{ form.password }}</div>
+            </div>
+        </fieldset>
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-3">
+                <button type="reset" class="btn btn-outline-primary">Reset</button>
+                <button type="submit" class="btn btn-outline-primary">Login</button>
+            </div>
+        </div>
     </form>
-
-    <p>New User?? <a href="{% url 'accounts:register' %}">Register Here</a> </p>
 
 {% endblock %}

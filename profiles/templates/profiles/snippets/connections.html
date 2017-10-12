@@ -1,0 +1,12 @@
+<div class="card ">
+    <div class="card-header">Connections</div>
+    <div class="card-body" >
+        {% for connection in object.get_connections %}
+            {% if connection != object %}
+                <a href="{{ connection.get_absolute_url }}">{{ connection.get_full_name }}</a><br/>
+            {% endif %}
+        {% empty %}
+            No connections to show
+        {% endfor %}
+    </div>
+</div>

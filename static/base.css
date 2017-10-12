@@ -1,0 +1,12 @@
+.nav-avatar {
+    height: 30px;
+    width: 30px;
+}
+
+.card, .form-post {
+    margin-top:1em;
+}
+
+.comment {
+    margin-top:0em;
+}

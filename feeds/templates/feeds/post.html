@@ -1,8 +1,8 @@
+{% load static %}
 {% include 'feeds/add_post_form.html' %}
-<div class="panel-group">
     {% for post in posts %}
-        <div class="panel panel-default post" style="margin-top:20px">
-            <div class="panel-heading">
+    <div class="card row"  >
+        <div class="card-header">
                 <a href="{% url 'profiles:profile' username=post.posted_by.username %}">
                     {% if post.posted_by == request.user %}
                         You
@@ -22,24 +22,27 @@
                         {{ post.posted_on.get_full_name }}
                     {% endif %}
                 </a> timeline.
-                <div class="text-right"><small>{{ post.timestamp }}</small></div></div>
-            <div class="panel-body">{{ post.message }}</div>
-            <div class="panel-footer">
-                rated {{ post.get_ratings }} by {{ post.get_count}} user{{ post.get_count|pluralize }}
-                <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#{{ post.id }}comment">Comments</button>
-            </div>
+                <span class="text-right"><small>{{ post.timestamp }}</small></span>
         </div>
-        <div class="panel panel-default panel-collapse collapse" id = "{{ post.id }}comment" style="padding: 10px 10px 10px 10px; margin-top:0px " >
-        <ul>
-        {% for comment in post.comment_set.all %}
-            <li>{{ comment.comment }} commented by <b>{{ comment.commepynted_by }}</b> at {{ comment.timestamp }}</li>
-        {% empty %}
-            No comments
-        {% endfor %}
-        </ul>
-        {% include 'feeds/add_comment_form.html' %}
+        <div class="card-body">{{ post.message }}</div>
+        <div class="card-footer">
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#{{ post.id }}comment" aria-expanded="false" aria-controls="collapseExample">
+                Comments
+            </button>
         </div>
-    {% empty %}
-        No post to show
+    </div>
+    <div class="collapse row " id="{{ post.id }}comment">
+        <div class="card card-body comment">
+            <dl>
+            {% for comment in post.comment_set.all %}
+                <dt>{{ comment.commented_by }}</dt>
+                <dd>{{ comment.comment }}</dd>
+            {% empty %}
+                No new comments
+            {% endfor %}
+            </dl>
+
+            {% include 'feeds/add_comment_form.html' %}
+        </div>
+    </div>
     {% endfor %}
-</div>

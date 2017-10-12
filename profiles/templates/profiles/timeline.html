@@ -1,29 +1,27 @@
-
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}{{ object.username }}{% endblock %}
 
-{% block home_active %}active{% endblock %}
-{% load static %}
 {% block content %}
     <div class="row">
         <div class="col-sm-3">
-            <div class="panel panel-default" style="padding: 20px 20px 20px 20px">
-                <div class="panel-body text-center">
+            <div class="card">
+                <div class="card-body text-center">
                     {% if object.gender == "M" %}
-                        <img class="img-circle" src="{% static 'profiles/avatars/male.svg' %}" style="width: 150px ; height: 150px ; border:solid 1px" />
+                        <img class="rounded-circle" src="{% static 'profiles/avatars/male.svg' %}" style="width: 150px ; height: 150px ; border:solid 1px" />
                     {% else %}
-                        <img class="img-circle" src="{% static 'profiles/avatars/female.svg' %}" style="width: 150px ; height: 150px ; border:solid 1px" />
+                        <img class="rounded-circle" src="{% static 'profiles/avatars/female.svg' %}" style="width: 150px ; height: 150px ; border:solid 1px" />
                     {% endif %}
-                    <h3><a href="{% url 'profiles:profile' username=object.username %}">{{ object.get_full_name }}</a></h3></div>
-                <div class="panel-footer">rated {{ object.get_ratings }} by {{ object.get_count}} user{{ object.get_count|pluralize }}</div>
+                    <p></p>
+                    <h4><a href="{% url 'profiles:profile' username=object.username %}">{{ object.get_full_name }}</a></h4></div>
+                <div class="card-footer">rated {{ object.get_ratings }} by {{ object.get_count}} user{{ object.get_count|pluralize }}</div>
+                </div>
             </div>
-        </div>
-        <div class="col-sm-6">
+        <div class="col-sm-6 col-md-6 col-lg-6">
             {% include 'feeds/post.html' with posts=object.get_timeline_posts redirect_to='timeline' %}
         </div>
         <div class="col-sm-3">
-            {% include 'profiles/snippets/notifications.html' %}
+            Recents
         </div>
     </div>
 {% endblock %}
