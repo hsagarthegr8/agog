@@ -19,8 +19,10 @@
                 {% if request.user != object %}
                     {% if request.user in object.get_request_user %}
                         <button class="btn btn-info disabled" type="button">Awaiting Confirmation</button>
+                    {% elif object in request.user.get_request_user %}
+                        <button class="btn btn-outline-primary disabled" type="button">Awaiting your approval</button>
                     {% elif request.user in object.get_connections %}
-                        <button class="btn btn-info" type="button">Already Connected</button>
+                        <button class="btn btn-info disabled" type="button">Already Connected</button>
                     {% else %}
                         <a href="{% url 'profiles:new_request' username=object.username %}">
                             <button class="btn btn-info" type="button">Add Connection</button>

@@ -17,7 +17,6 @@ class Post(models.Model):
         return self.posted_by.username +' - '+ self.message
 
 
-
 class Comment(models.Model):
     commented_by = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(Post,on_delete=models.CASCADE)
@@ -40,6 +39,7 @@ class PostReactions(models.Model):
 
     class Meta:
         unique_together = ['post','reacted_by']
+        verbose_name_plural='Post Reactions'
 
 
 class CommentReactions(models.Model):
@@ -53,3 +53,4 @@ class CommentReactions(models.Model):
 
     class Meta:
         unique_together = ['comment','reacted_by']
+        verbose_name_plural = 'Comment Reactions'
