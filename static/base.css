@@ -1,6 +1,6 @@
 .nav-avatar {
-    height: 30px;
-    width: 30px;
+    height:2rem;
+    border: solid 1px;
 }
 
 .card, .form-post {
@@ -9,4 +9,8 @@
 
 .comment {
     margin-top:0em;
+}
+
+.request-nav {
+    margin-top: 0px;
 }

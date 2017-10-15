@@ -1,7 +1,7 @@
 {% load static %}
 {% include 'feeds/add_post_form.html' %}
     {% for post in posts %}
-    <div class="card row"  >
+    <div class="card "  >
         <div class="card-header">
                 <a href="{% url 'profiles:profile' username=post.posted_by.username %}">
                     {% if post.posted_by == request.user %}
@@ -31,7 +31,7 @@
             </button>
         </div>
     </div>
-    <div class="collapse row " id="{{ post.id }}comment">
+    <div class="collapse  " id="{{ post.id }}comment">
         <div class="card card-body comment">
             <dl>
             {% for comment in post.comment_set.all %}
