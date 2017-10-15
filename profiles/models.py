@@ -41,7 +41,7 @@ class Connections(models.Model):
         unique_together = ['user1','user2']
 
     def __str__(self):
-        return self.user1.username
+        return self.user1.username +'-'+ self.user2.username
 
     def active(self):
         self.is_active=True
