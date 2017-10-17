@@ -1,6 +1,6 @@
 {% load static %}
 <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
-    <a class="navbar-brand" href="{% url 'home' %}">Agog</a>
+    <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'images/logo.svg' %}" class="logo"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -29,7 +29,11 @@
             {% if request.user.is_authenticated %}
                 <div class="nav-item dropdown">
                     <a class="nav-link " href="#" id="requests" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-user-plus fa-lg"><span class="badge badge-primary">{{ request.user.get_requests.count }}</span> </i>
+                        <i class="fa fa-user-plus fa-lg">
+                            {% if request.user.get_requests.count %}
+                                <span class="badge badge-primary">{{ request.user.get_requests.count }}</span>
+                            {% endif %}
+                        </i>
                     </a>
                     {% include 'profiles/snippets/nav-request.html' %}
                 </div>

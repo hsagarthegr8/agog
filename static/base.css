@@ -8,9 +8,14 @@
 }
 
 .comment {
-    margin-top:0em;
+    margin-top:0;
+}
+
+.logo {
+    height:30px;
+    background-color: white;
 }
 
 .request-nav {
-    margin-top: 0px;
+    padding-top: 0;
 }

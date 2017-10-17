@@ -5,7 +5,9 @@
     <div class="card">
         <p></p>
         <div class="text-center">
-        {% if object.gender == "M" %}
+        {% if object.profile.image %}
+            <img class="rounded-circle" src="{{ object.profile.image.url }}" style="width: 150px ; height: 150px ; border:solid 1px" />
+        {% elif object.gender == "M" %}
                 <img class="rounded-circle" src="{% static 'profiles/avatars/male.svg' %}" style="width: 150px ; height: 150px ; border:solid 1px" />
             {% else %}
                 <img class="rounded-circle" src="{% static 'profiles/avatars/female.svg' %}" style="width: 150px ; height: 150px ; border:solid 1px" />
