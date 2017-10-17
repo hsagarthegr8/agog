@@ -3,46 +3,83 @@
     {% for post in posts %}
     <div class="card "  >
         <div class="card-header">
-                <a href="{% url 'profiles:profile' username=post.posted_by.username %}">
-                    {% if post.posted_by == request.user %}
-                        You
-                    {% else %}
-                        {{ post.posted_by.get_full_name }}
-                    {% endif %}
+            <a href="{% url 'profiles:profile' username=post.posted_by.username %}">
+                {% if post.posted_by == request.user %}
+                    You
+                {% else %}
+                    {{ post.posted_by.get_full_name }}
+                {% endif %}
+            </a>
+            posted on
+            <a href="{% url 'profiles:profile' username=post.posted_on.username %}">
+                {% if post.posted_on == request.user %}
+                    your
+                {% elif post.posted_on == post.posted_by and post.posted_on.gender == 'M' %}
+                    his
+                {% elif post.posted_on == post.posted_by and post.posted_on.gender == 'F' %}
+                    her
+                {% else %}
+                    {{ post.posted_on.get_full_name }}
+                {% endif %}
+            </a> timeline.
+            <span class="text-right"><small>{{ post.timestamp }}</small></span>
+            <span class="pull-right">
+                <div class="dropdown">
+                <a href="#" id="{{ post.id }}post-settings" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-cog" aria-hidden="true"></i>
                 </a>
-                posted on
-                <a href="{% url 'profiles:profile' username=post.posted_on.username %}">
-                    {% if post.posted_on == request.user %}
-                        your
-                    {% elif post.posted_on == post.posted_by and post.posted_on.gender == 'M' %}
-                        his
-                    {% elif post.posted_on == post.posted_by and post.posted_on.gender == 'F' %}
-                        her
+                <div class="dropdown-menu" aria-labelledby="{{ post.id }}post-settings">
+                    {% if post.posted_by == request.user %}
+                        <form method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="next" value="{{ request.path }}">
+                            <input type="hidden" name="post" value="{{ post.id }}">
+                            <a class="dropdown-item" href="#">Edit</a>
+                        </form>
+                        <form method="post" action="{% url 'feeds:delete_post' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="next" value="{{ request.path }}">
+                            <input type="hidden" name="post" value="{{ post.id }}">
+                            <input  type="submit" class="dropdown-item" value="Delete" />
+                        </form>
+                    {% elif post.posted_on == request.user %}
+                        <form method="post" action="{% url 'feeds:delete_post' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="next" value="{{ request.path }}">
+                            <input type="hidden" name="post" value="{{ post.id }}">
+                            <input  type="submit" class="dropdown-item" value="Delete" />
+                        </form>
                     {% else %}
-                        {{ post.posted_on.get_full_name }}
+                        <a class="dropdown-item" href="#">Hide</a>
                     {% endif %}
-                </a> timeline.
-                <span class="text-right"><small>{{ post.timestamp }}</small></span>
+                </div>
+                </div>
+            </span>
         </div>
         <div class="card-body">{{ post.message }}</div>
         <div class="card-footer">
-            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#{{ post.id }}comment" aria-expanded="false" aria-controls="collapseExample">
-                Comments
-            </button>
+            <ul class="list-inline">
+            <li class="dropdown list-inline-item">
+                <button class="btn btn-primary" type="button" id="about-us" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                React
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="about-us">
+                <ul class="list-inline">
+                    <li class="list-inline-item" href="#">Our Story</li>
+                    <li class="list-inline-item" href="#">Our Team</li>
+                    <li class="list-inline-item" href="#">Contact Us</li>
+                </ul>
+                </ul>
+            </li>
+            <li class="list-inline-item"><button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#{{ post.id }}comment" aria-expanded="false" aria-controls="collapseExample">
+                    Comments
+            </button></li>
+            </ul>
+
+
         </div>
     </div>
     <div class="collapse  " id="{{ post.id }}comment">
-        <div class="card card-body comment">
-            <dl>
-            {% for comment in post.comment_set.all %}
-                <dt>{{ comment.commented_by }}</dt>
-                <dd>{{ comment.comment }}</dd>
-            {% empty %}
-                No new comments
-            {% endfor %}
-            </dl>
-
-            {% include 'feeds/add_comment_form.html' %}
-        </div>
+        {% include 'feeds/comments.html' %}
     </div>
     {% endfor %}
