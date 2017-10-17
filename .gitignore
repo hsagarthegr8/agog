@@ -124,3 +124,5 @@ db.sqlite3
 staticfiles/
 
 .fuse_hidden000000f000000005
+
+mediafiles/
