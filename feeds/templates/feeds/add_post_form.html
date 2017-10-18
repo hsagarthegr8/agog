@@ -2,8 +2,11 @@
     {% csrf_token %}
     <div class="form-group form-post">
         <input type="hidden" name="next" value="{{ request.path }}">
-        <textarea class="form-control" name="message" placeholder="Add a new post" rows = "5" required=1></textarea>
-        <button type="submit" class="align-right">Add Post</button>
+        <textarea class="tinymce form-control" name="message" placeholder="Add a new post" rows = "5" ></textarea>
+        <button type="submit" class="right">Add Post</button>
     </div>
-
 </form>
+
+{% include 'feeds/tinymce.html' %}
+
+
