@@ -27,7 +27,6 @@ urlpatterns = [
     url('^accounts/', include('accounts.urls'), name='accounts'),
     url(r'^', include('feeds.urls'), name='feeds'),
     url(r'^', include('utils.urls'), name='utils'),
-    url(r'^tinymce/', include('tinymce.urls')),
 ]
 
 if settings.DEBUG:
