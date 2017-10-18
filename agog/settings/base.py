@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'profiles.apps.ProfilesConfig',
     'feeds.apps.FeedsConfig',
     'utils.apps.UtilsConfig',
-    'tinymce',
 ]
 
 MIDDLEWARE = [
