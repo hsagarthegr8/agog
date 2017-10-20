@@ -35,7 +35,7 @@
         </div>
     </div>
     <hr/>
-    <div class="card">
+    <div class="card about-profile">
         <h2 class="text-center">About</h2>
         <ul>
             <li>born on {{ object.date_of_birth }}</li>
@@ -56,7 +56,6 @@
             {% include 'feeds/post.html' with posts=object.get_posts redirect_to='profile' %}
         </div>
         <div class="col-sm-3">
-            Recent Activity
             <div class="card">
                 Sponsored by Offshot
             </div>

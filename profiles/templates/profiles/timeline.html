@@ -4,7 +4,9 @@
 
 {% block content %}
     <div class="row">
-        <div class="col-sm-3">
+        <div class="col-sm-3 fix">
+            <!-- Normal Cards
+
             <div class="card">
                 <div class="card-body text-center">
                     {% if object.gender == "M" %}
@@ -16,6 +18,23 @@
                     <h4><a href="{% url 'profiles:profile' username=object.username %}">{{ object.get_full_name }}</a></h4></div>
                 <div class="card-footer">rated {{ object.get_ratings }} by {{ object.get_count}} user{{ object.get_count|pluralize }}</div>
                 </div>
+            -->
+        <div class="card card-profile text-center">
+    <img class="card-img-top" src="https://unsplash.it/340/160?image=354"/>
+    <div class="card-block">
+        {% if object.gender == "M" %}
+                        <img class="card-img-profile" src="{% static 'profiles/avatars/male.svg' %}" style="width: 150px ; height: 150px ; border:solid 1px" />
+                    {% else %}
+                        <img class="card-img-profile" src="{% static 'profiles/avatars/female.svg' %}" style="width: 150px ; height: 150px ; border:solid 1px" />
+                    {% endif %}
+        <h4 class="card-title">
+            {{ object.get_full_name }}
+            <small><a class="card-links" href="{{ object.get_absolute_url }}">@{{ object.username }}</a> </small>
+        </h4>
+    rated {{ object.get_ratings }} by {{ object.get_count}} user{{ object.get_count|pluralize }}
+
+    </div>
+</div>
             </div>
         <div class="col-sm-6 col-md-6 col-lg-6">
             {% include 'feeds/post.html' with posts=object.get_timeline_posts redirect_to='timeline' %}

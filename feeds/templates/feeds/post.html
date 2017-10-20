@@ -1,7 +1,7 @@
 {% load static %}
 {% include 'feeds/add_post_form.html' %}
     {% for post in posts %}
-    <div class="card "  >
+    <div class="card post"  >
         <div class="card-header">
             <a href="{% url 'profiles:profile' username=post.posted_by.username %}">
                 {% if post.posted_by == request.user %}

@@ -1,10 +1,12 @@
 <form action="{% url 'feeds:add_post' object.username %}" method="post">
     {% csrf_token %}
-    <div class="form-group form-post">
+    <div class="form-group post-form">
         <input type="hidden" name="next" value="{{ request.path }}">
-        <textarea class="tinymce form-control" name="message" placeholder="Add a new post" rows = "5" ></textarea>
-        <button type="submit" class="right">Add Post</button>
+        <textarea class="tinymce form-control" name="message" placeholder="Add a new post" rows = "5"  ></textarea>
     </div>
+    <p class="text-right post-btn">
+        <button type="submit" class="btn btn-outline-primary" >Add Post</button>
+    </p>
 </form>
 
 {% include 'feeds/tinymce.html' %}

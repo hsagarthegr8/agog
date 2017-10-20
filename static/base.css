@@ -3,12 +3,35 @@
     border: solid 1px;
 }
 
-.card, .form-post {
-    margin-top:1em;
+.post {
+    margin-top:1.5em;
+}
+
+.post .card-header {
+    background-color: white;
+    border-bottom: none;
+}
+
+.post .card-footer {
+    background-color: white;
+    border-top: none;
 }
 
 .comment {
     margin-top:0;
+    border-radius: 0;
+    border: 0;
+    box-shadow: 0.5em 0.5em 1em rgba(0, 0, 0, 0.2);
+}
+
+.post-form {
+    display: block;
+    min-height: 263px;
+    height: auto;
+    margin-top: 0;
+    border-radius: 0;
+    border: 0;
+    box-shadow: 0.5em 0.5em 1em rgba(0, 0, 0, 0.2);
 }
 
 .logo {
@@ -18,4 +41,90 @@
 
 .request-nav {
     padding-top: 0;
+}
+
+
+.card {
+    border: 0;
+    box-shadow: 0.5em 0.5em 1em rgba(0, 0, 0, 0.2);
+}
+/* Profile Cards */
+.card-profile {
+    margin-top: 0em;
+    background-color: transparent;
+    border-radius: 0;
+    overflow: auto;
+    width: 100%;
+    min-height: 330px;
+    height: auto;
+
+
+}
+.card-profile .card-img-top {
+  border-radius: 0;
+    width: inherit;
+    height: 120px;
+}
+.card-profile .card-img-profile {
+    background: whitesmoke;
+    max-width: 100%;
+    border-radius: 50%;
+    margin-top: -95px;
+    margin-bottom: 35px;
+    border: 5px solid #e6e5e1;
+}
+.card-profile .card-title {
+  margin-bottom: 50px;
+}
+.card-profile .card-title small {
+  display: block;
+  font-size: .6em;
+  margin-top: .2em;
+}
+.card-profile .card-links {
+  margin-bottom: 25px;
+}
+.card-profile .card-links .fa {
+  margin: 0 1em;
+  font-size: 1.6em;
+}
+.card-profile .card-links .fa:focus, .card-profile .card-links .fa:hover {
+  text-decoration: none;
+}
+.card-profile .card-links .fa.fa-dribbble {
+  color: #ea4b89;
+  font-weight: bold;
+}
+.card-profile .card-links .fa.fa-dribbble:hover {
+  color: #e51d6b;
+}
+.card-profile .card-links .fa.fa-twitter {
+  color: #68aade;
+}
+.card-profile .card-links .fa.fa-twitter:hover {
+  color: #3e92d5;
+}
+.card-profile .card-links .fa.fa-facebook {
+  color: #3b5999;
+}
+.card-profile .card-links .fa.fa-facebook:hover {
+  color: #2d4474;
+}
+
+
+.about-profile {
+    margin-top:1.5em;
+    border-radius: 0;
+    border: 0;
+    box-shadow: 0.5em 0.5em 1em rgba(0, 0, 0, 0.2);
+    margin-bottom: 2em;
+}
+
+
+.post-btn {
+    margin-top: 0;
+}
+
+.post-btn button {
+        box-shadow: 0.5em 0.5em 1em rgba(0, 0, 0, 0.2);
 }

@@ -9,14 +9,15 @@ tinymce.init({
 	/* width and height of the editor */
 	width: "100%",
 	height: 150,
+	resize: false,
 
 	/* display statusbar */
-	statubar: true,
+	statusbar: true,
 
 	/* plugin */
 	plugins: [
-		"advlist autolink link image lists charmap print preview hr anchor pagebreak",
-		"searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+		"advlist autoresize autolink link image lists charmap hr anchor pagebreak",
+		"searchreplace wordcount  code  media nonbreaking",
 		"save table contextmenu directionality emoticons template paste textcolor"
 	],
 
@@ -54,5 +55,11 @@ tinymce.init({
 			{title: "Right", icon: "alignright", format: "alignright"},
 			{title: "Justify", icon: "alignjustify", format: "alignjustify"}
 		]}
-	]
+	],
+
+	setup: function (editor) {
+        editor.on('init', function (e) {
+            editor.save();
+        });
+    }
 });
