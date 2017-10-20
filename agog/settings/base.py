@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'profiles.apps.ProfilesConfig',
     'feeds.apps.FeedsConfig',
     'utils.apps.UtilsConfig',
+    'star_ratings.apps.StarRatingsAppConfig',
 ]
 
 MIDDLEWARE = [
@@ -138,6 +139,9 @@ LOGIN_REDIRECT_URL = '/timeline'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'mediafiles')
+
+STAR_RATINGS_STAR_HEIGHT = 25
+STAR_RATINGS_STAR_WIDTH = STAR_RATINGS_STAR_HEIGHT
 
 
 

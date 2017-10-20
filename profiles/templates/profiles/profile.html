@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load ratings %}
 
 {% block content %}
     <div class="card">
@@ -17,7 +18,13 @@
                 <p>@{{ object.username }}</p>
             </a>
             <p>
-                rated {{ object.get_ratings }} by {{ object.get_count}} user{{ object.get_count|pluralize }}
+            {% if object == request.user %}
+                {% ratings object read_only=1 %}
+            {% else %}
+                {% ratings object %}
+            {% endif %}
+
+            <!--
                 {% if request.user != object %}
                     {% if request.user in object.get_request_user %}
                         <button class="btn btn-info disabled" type="button">Awaiting Confirmation</button>
@@ -31,6 +38,8 @@
                         </a>
                     {% endif %}
                 {% endif %}
+                -->
+
             </p>
         </div>
     </div>

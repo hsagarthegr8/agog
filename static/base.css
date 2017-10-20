@@ -60,6 +60,10 @@
 
 
 }
+
+.card-profile .card-block img, .card-profile .card-block h4{
+    margin-bottom:0.5em;
+}
 .card-profile .card-img-top {
   border-radius: 0;
     width: inherit;

@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load ratings %}
 {% block title %}{{ object.username }}{% endblock %}
 
 {% block content %}
@@ -31,7 +32,7 @@
             {{ object.get_full_name }}
             <small><a class="card-links" href="{{ object.get_absolute_url }}">@{{ object.username }}</a> </small>
         </h4>
-    rated {{ object.get_ratings }} by {{ object.get_count}} user{{ object.get_count|pluralize }}
+    {% ratings object read_only=1 icon_height=20 icon_width=20 %}
 
     </div>
 </div>

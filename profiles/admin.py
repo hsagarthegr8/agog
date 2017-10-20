@@ -1,7 +1,6 @@
 from django.contrib import admin
 
-from .models import UserRating, Connections, Profile
+from .models import  Connections, Profile
 
-admin.site.register(UserRating)
 admin.site.register(Connections)
 admin.site.register(Profile)

@@ -1,0 +1,25 @@
+{% extends "star_ratings/widget_base.html" %}
+{% load i18n %}
+
+
+{% block rating_detail %}
+    {% block rating_user %}
+    <div class="star-ratings-rating-user">
+        <small>Rated by {{ rating.count }} user{{ rating.count|pluralize }}.<br/></small>
+    {% if editable %}
+        <small>
+        {% trans 'You rated:' %}
+        <span class='star-ratings-rating-value'>
+            {% if user_rating %}
+                {{ user_rating.score }}
+            {% else %}
+                {% trans 'Not rated' %}
+            {% endif %}
+        </span>
+        </small>
+    {% endif %}
+
+    </div>
+    {% endblock %}
+{% endblock %}
+

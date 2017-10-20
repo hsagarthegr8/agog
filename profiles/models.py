@@ -21,15 +21,6 @@ class Profile(models.Model):
         return self.user.username
 
 
-class UserRating(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    rated_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='rated_by_set')
-    rating = models.SmallIntegerField()
-
-    class Meta:
-        unique_together = ('user', 'rated_by')
-
-
 class Connections(models.Model):
     user1= models.ForeignKey(User,on_delete=models.CASCADE)
     user2= models.ForeignKey(User,on_delete=models.CASCADE,related_name='connection2_set')
