@@ -5,14 +5,21 @@
 {% block content %}
     <div class="card">
         <p></p>
-        <div class="text-center">
-        {% if object.profile.image %}
-            <img class="rounded-circle" src="{{ object.profile.image.url }}" style="width: 150px ; height: 150px ; border:solid 1px" />
-        {% elif object.gender == "M" %}
-                <img class="rounded-circle" src="{% static 'profiles/avatars/male.svg' %}" style="width: 150px ; height: 150px ; border:solid 1px" />
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6">
+            <div class="text-center">
+            <img class="rounded-circle profile-picture"
+            {% if object.profile.image %}
+                src="{{ object.profile.image.url }}" style="width: 150px ; height: 150px ; border:solid 1px" />
+            {% elif object.gender == "M" %}
+                src="{% static 'profiles/avatars/male.svg' %}" style="width: 150px ; height: 150px ; border:solid 1px" />
             {% else %}
-                <img class="rounded-circle" src="{% static 'profiles/avatars/female.svg' %}" style="width: 150px ; height: 150px ; border:solid 1px" />
+                src="{% static 'profiles/avatars/female.svg' %}" style="width: 150px ; height: 150px ; border:solid 1px" />
             {% endif %}
+            <span class="text-right">
+
+            </span>
             <h3>{{ object.get_full_name }}</h3>
             <a class="viewsitelink " href="{% url 'profiles:profile' username=object.username  %}">
                 <p>@{{ object.username }}</p>
@@ -23,24 +30,12 @@
             {% else %}
                 {% ratings object %}
             {% endif %}
-
-            <!--
-                {% if request.user != object %}
-                    {% if request.user in object.get_request_user %}
-                        <button class="btn btn-info disabled" type="button">Awaiting Confirmation</button>
-                    {% elif object in request.user.get_request_user %}
-                        <button class="btn btn-outline-primary disabled" type="button">Awaiting your approval</button>
-                    {% elif request.user in object.get_connections %}
-                        <button class="btn btn-info disabled" type="button">Already Connected</button>
-                    {% else %}
-                        <a href="{% url 'profiles:new_request' username=object.username %}">
-                            <button class="btn btn-info" type="button">Add Connection</button>
-                        </a>
-                    {% endif %}
-                {% endif %}
-                -->
-
             </p>
+        </div>
+            </div>
+        <div class="col-sm-3">
+            {% include 'profiles/snippets/connection-buttons.html' %}
+        </div>
         </div>
     </div>
     <hr/>
@@ -65,7 +60,7 @@
             {% include 'feeds/post.html' with posts=object.get_posts redirect_to='profile' %}
         </div>
         <div class="col-sm-3">
-            <div class="card">
+            <div class="card" style="margin-top: 1em">
                 Sponsored by Offshot
             </div>
         </div>
