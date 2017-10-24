@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models import Q
 from django.db.models.signals import post_save
+from django.conf import settings
 from django.shortcuts import reverse
 from django.dispatch import receiver
 from django.contrib.auth.models import (
@@ -159,21 +160,26 @@ class Verification(models.Model):
     def send(self):
         activation_url = reverse('accounts:activate', kwargs={'username': self.user.username,
                                                               'activation_key': self.activation_key})
+        domain = None
+        if settings.DEBUG:
+            domain = 'http://127.0.0.1:8000'
+        else:
+            domain = 'http://hsagar1706.pythonanywhere.com'
+
+        activation_url = domain + activation_url
         context = {'username':self.user.username, 'activation_url' : activation_url}
         ActivationEmail(to = [self.user.email], url=activation_url).send()
 
 
-'''
 @receiver(post_save, sender=User)
 def save_profile(sender, instance, **kwargs):
     if not instance.is_verified:
-        v = Verification()
-        v.user = instance
-        v.save()
-'''
+        try:
+            v = Verification.objects.create(user = instance)
+        except:
+            pass
 
-'''
+
 @receiver(post_save, sender=Verification)
 def send_activation_email(sender, instance, **kwargs):
     instance.send()
-'''

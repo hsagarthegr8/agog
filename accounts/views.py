@@ -28,7 +28,7 @@ def activation(request,username,activation_key):
     user.is_verified = True
     user.save()
     obj.delete()
-    return redirect(reverse_lazy('accounts:login'))
+    return redirect(reverse('profiles:timeline'))
 
 def loginit(request):
     username = request.POST['username']
