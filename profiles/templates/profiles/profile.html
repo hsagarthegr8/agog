@@ -34,7 +34,9 @@
         </div>
             </div>
         <div class="col-sm-3">
-            {% include 'profiles/snippets/connection-buttons.html' %}
+            {% if request.user != object %}
+                {% include 'connections/snippets/connection-buttons.html' %}
+            {% endif %}
         </div>
         </div>
     </div>
@@ -54,7 +56,7 @@
 
     <div class="row">
         <div class="col-sm-3">
-            {% include 'profiles/snippets/connections.html' %}
+            {% include 'connections/snippets/connections.html' %}
         </div>
         <div class="col-sm-6">
             {% include 'feeds/post.html' with posts=object.get_posts redirect_to='profile' %}

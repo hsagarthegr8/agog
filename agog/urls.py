@@ -27,6 +27,7 @@ urlpatterns = [
     url('^accounts/', include('accounts.urls'), name='accounts'),
     url(r'^', include('feeds.urls'), name='feeds'),
     url(r'^', include('utils.urls'), name='utils'),
+    url(r'^', include('connections.urls'), name='connections'),
     url(r'^ratings/', include('star_ratings.urls', namespace='ratings', app_name='ratings')),
 
 ]

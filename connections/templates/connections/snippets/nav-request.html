@@ -1,0 +1,25 @@
+    <div class="dropdown-menu request-nav " aria-labelledby="requests" style="width: 10cm; height: 10cm" >
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Connection Requests</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for conn in request.user.get_requests %}
+                <tr>
+                <td>
+            <a href="{% url 'profiles:profile' username=conn.user1.username %}">{{ conn.user1.full_name }}</a> sent you a connection request.<br/>
+            <a href="{% url 'connections:accept_request' id=conn.id %}"><button class="btn btn-outline-primary" type="button">Accept</button></a>
+            <a href="{% url 'connections:delete_request' id=conn.id %}"><button class="btn btn-outline-danger" type="button">Reject</button></a>
+                </td>
+            {% empty %}
+                <td>
+                No new Requests
+                </td>
+                </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    </div>

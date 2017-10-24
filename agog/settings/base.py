@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'profiles.apps.ProfilesConfig',
     'feeds.apps.FeedsConfig',
     'utils.apps.UtilsConfig',
+    'connections.apps.ConnectionsConfig',
     'star_ratings.apps.StarRatingsAppConfig',
 ]
 
