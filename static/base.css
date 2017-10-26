@@ -142,3 +142,7 @@
 .profile-picture {
   margin-left:0%;
 }
+
+.hidden-form {
+    display: none;
+}
