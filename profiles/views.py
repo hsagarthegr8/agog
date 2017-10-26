@@ -25,3 +25,9 @@ class ProfileView(LoginRequiredMixin, DetailView):
         return User.objects.get(username=self.request.user)
 
 
+class SettingsView(LoginRequiredMixin, DetailView):
+    model = User
+    template_name = 'profiles/settings.html'
+
+    def get_object(self, queryset=None):
+        return User.objects.get(username=self.request.user)

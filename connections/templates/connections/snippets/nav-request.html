@@ -8,17 +8,34 @@
         <tbody>
             {% for conn in request.user.get_requests %}
                 <tr>
-                <td>
-            <a href="{% url 'profiles:profile' username=conn.user1.username %}">{{ conn.user1.full_name }}</a> sent you a connection request.<br/>
-            <a href="{% url 'connections:accept_request' id=conn.id %}"><button class="btn btn-outline-primary" type="button">Accept</button></a>
-            <a href="{% url 'connections:delete_request' id=conn.id %}"><button class="btn btn-outline-danger" type="button">Reject</button></a>
-                </td>
+                    <td>
+                        <a href="{% url 'profiles:profile' username=conn.user1.username %}">{{ conn.user1.full_name }}</a> sent you a connection request.<br/>
+                        <form method="post" action="{% url 'connections:accept_request' %}" class="form-inline hidden-form">
+                            {% csrf_token %}
+                            <input type="hidden" name="id" value="{{ conn.id }}">
+                            <input type="hidden" name="next" value="{{ request.path }}">
+                            <input type="submit" id="accept-{{ conn.id }}" />
+                        </form>
+                        <form method="post" action="{% url 'connections:delete_request' %}" class="form-inline hidden-form">
+                            {% csrf_token %}
+                            <input type="hidden" name="id" value="{{ conn.id }}">
+                            <input type="hidden" name="next" value="{{ request.path }}">
+                            <input type="submit" id="reject-{{ conn.id }}"/>
+                        </form>
+                        <label for="accept-{{ conn.id }}" role="button" class="btn btn-outline-primary" tabindex="0">
+                          Accept
+                        </label>
+                        <label for="reject-{{ conn.id }}" role="button" class="btn btn-outline-danger" tabindex="0">
+                          Reject
+                        </label>
+
+                    </td>
             {% empty %}
-                <td>
-                No new Requests
-                </td>
+                    <td>
+                    No new Requests
+                    </td>
                 </tr>
-        {% endfor %}
+            {% endfor %}
         </tbody>
     </table>
 

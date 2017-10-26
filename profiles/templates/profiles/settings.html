@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-header">Blocked Users</div>
+        <div class="card-body">
+            {% for blocks in object.blocklist.all %}
+                <form method="post" action="{% url 'connections:unblock_user' %}" class="form-inline hidden-form">
+                    {% csrf_token %}
+                    <input type="hidden" name="id" value={{ blocks.id }}>
+                    <input type="hidden" name="next" value="{{ request.path }}">
+                    <input type="submit" id="unblock-{{ blocks.id }}"/>
+                </form>
+                {{ blocks.user2.full_name }}
+                <label for="unblock-{{ blocks.id }}" role="button" class="btn btn-outline-success pull-right" tabindex="0">
+                    Unblock
+                </label>
+                <br/>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

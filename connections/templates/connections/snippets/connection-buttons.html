@@ -1,5 +1,16 @@
 {% load connection_tags %}
 {% is_connected request.user object as conn %}
+
+<!-- Form for blocking user -->
+<form method="post" action="{% url 'connections:block_user' %}" class="form-inline hidden-form">
+    {% csrf_token %}
+    <input type="hidden" name="user1" value={{ request.user.username }}>
+    <input type="hidden" name="user2" value="{{ object.username }}">
+    <input type="hidden" name="next" value="{{ request.path }}">
+    <input type="submit" id="block-{{ object.id }}"/>
+</form>
+
+
 <div class="btn-group pull-right" style="margin-right: 1em">
     {% if conn %}
         {% if conn.is_active %}
@@ -9,9 +20,17 @@
             </button>
             <div class="dropdown-menu dropdown-menu-right">
                 <a class="dropdown-item" href="#">Edit Connection</a>
-                <a class="dropdown-item" href="#">Delete Connection</a>
+                <form method="post" action="{% url 'connections:delete_connection' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="id" value="{{ conn.id }}">
+                    <input type="hidden" name="next" value="{{ request.path }}">
+                    <button class="dropdown-item" type="submit">Delete Connections</button>
+                    </form>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Block</a>
+
+                <label for="block-{{ object.id }}" role="button" class="dropdown-item" tabindex="0">
+                    Block
+                </label>
             </div>
         {% elif conn.user1 == request.user %}
             <button class="btn btn-light disabled" type="button">Awaiting Confirmation</button>
@@ -19,9 +38,21 @@
                 <span class="sr-only">Toggle Dropdown</span>
             </button>
             <div class="dropdown-menu dropdown-menu-right">
-                <a class="dropdown-item" href="#">Delete Request</a>
+                <form method="post" action="{% url 'connections:delete_request' %}" class="form-inline hidden-form">
+                    {% csrf_token %}
+                    <input type="hidden" name="id" value="{{ conn.id }}">
+                    <input type="hidden" name="next" value="{{ request.path }}">
+                    <input type="submit" id="delete-request-{{ conn.id }}"/>
+                </form>
+                <label for="delete-request-{{ conn.id }}" role="button" class="dropdown-item" tabindex="0">
+                    Delete Request
+                </label>
+
+
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Block</a>
+                <label for="block-{{ object.id }}" role="button" class="dropdown-item" tabindex="0">
+                    Block
+                </label>
             </div>
         {% else %}
             <button class="btn btn-light disabled" type="button">Awaiting your approval</button>
@@ -29,10 +60,28 @@
                 <span class="sr-only">Toggle Dropdown</span>
             </button>
             <div class="dropdown-menu dropdown-menu-right">
-                <a class="dropdown-item" href="#">Accept</a>
-                <a class="dropdown-item" href="#">Reject</a>
+                <form method="post" action="{% url 'connections:accept_request' %}" class="form-inline hidden-form">
+                    {% csrf_token %}
+                    <input type="hidden" name="id" value="{{ conn.id }}">
+                    <input type="hidden" name="next" value="{{ request.path }}">
+                    <input type="submit" id="accept-{{ conn.id }}" />
+                </form>
+                <form method="post" action="{% url 'connections:delete_request' %}" class="form-inline hidden-form">
+                    {% csrf_token %}
+                    <input type="hidden" name="id" value="{{ conn.id }}">
+                    <input type="hidden" name="next" value="{{ request.path }}">
+                    <input type="submit" id="reject-{{ conn.id }}"/>
+                </form>
+                <label for="accept-{{ conn.id }}" role="button" class="dropdown-item" tabindex="0">
+                  Accept
+                </label>
+                <label for="reject-{{ conn.id }}" role="button" class="dropdown-item" tabindex="0">
+                  Reject
+                </label>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Block</a>
+                <label for="block-{{ object.id }}" role="button" class="dropdown-item" tabindex="0">
+                    Block
+                </label>
             </div>
         {% endif %}
     {% else %}
@@ -43,7 +92,9 @@
             <span class="sr-only">Toggle Dropdown</span>
         </button>
         <div class="dropdown-menu dropdown-menu-right">
-            <a class="dropdown-item" href="#">Block</a>
+            <label for="block-{{ object.id }}" role="button" class="dropdown-item" tabindex="0">
+                Block
+            </label>
         </div>
     {% endif %}
 </div>

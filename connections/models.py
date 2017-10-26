@@ -18,8 +18,18 @@ class Connections(models.Model):
         unique_together = ['user1','user2']
 
     def __str__(self):
-        return self.user1.username +'-'+ self.user2.username
+        return self.user1.username + ' - ' + self.user2.username
 
     def active(self):
         self.is_active=True
         self.save()
+
+
+class BlockList(models.Model):
+    user1 = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blocklist')
+    user2 = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blocked_by')
+
+    def __str__(self):
+        return self.user1.username + ' - ' + self.user2.username
+
+

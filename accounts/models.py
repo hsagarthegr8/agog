@@ -139,6 +139,11 @@ class User(AbstractBaseUser):
     def get_absolute_url(self):
         return '/profile/{}/'.format(self.username)
 
+    def get_blocked_users(self):
+        users = []
+        for blocks in self.blocklist.all():
+            users.append(blocks.user2)
+        return users
 
 from django.utils.crypto import get_random_string
 

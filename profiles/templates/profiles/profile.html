@@ -3,6 +3,13 @@
 {% load ratings %}
 
 {% block content %}
+    {% if object in request.user.get_blocked_users %}
+        <div class="card text-center">
+            <i class="fa fa-eye-slash" style="font-size:108px"></i>
+            <span style="font-size: 30px;">You have blocked this user. So you cannot view each others activities.
+                To unblock the user, Go to <a href="{% url 'profiles:settings' %}">settings</a></span>
+        </div>
+    {% else %}
     <div class="card">
         <p></p>
         <div class="row">
@@ -67,4 +74,5 @@
             </div>
         </div>
     </div>
+    {% endif %}
 {% endblock %}
