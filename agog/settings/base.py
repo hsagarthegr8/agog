@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'utils.apps.UtilsConfig',
     'connections.apps.ConnectionsConfig',
     'star_ratings.apps.StarRatingsAppConfig',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -149,3 +150,15 @@ STAR_RATINGS_STAR_WIDTH = STAR_RATINGS_STAR_HEIGHT
 
 EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
 SENDGRID_API_KEY = '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'
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
+}

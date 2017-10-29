@@ -1,4 +1,4 @@
-from django.conf.urls import url
+from django.conf.urls import url,include
 
 from .views import UserCreateView,LoginView,LogoutView,activation, loginit
 
@@ -9,5 +9,6 @@ urlpatterns = [
     url('^login/$',LoginView.as_view(),name='login'),
     url('^loginit/$', loginit, name='loginit' ),
     url('^logout/$',LogoutView.as_view(), name='logout'),
-    url('^activate/(?P<username>[a-z,0-9]+)/(?P<activation_key>[\w]+)/$', activation, name='activate')
+    url('^activate/(?P<username>[a-z,0-9]+)/(?P<activation_key>[\w]+)/$', activation, name='activate'),
+    url('^api/', include('accounts.api.urls'), name='api-accounts'),
 ]
