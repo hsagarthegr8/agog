@@ -1,5 +1,5 @@
 
-from django.conf.urls import url
+from django.conf.urls import url,include
 
 from .views import add_post, add_comment, delete_post, delete_comment
 
@@ -10,5 +10,5 @@ urlpatterns = [
     url(r'^comment/new/$', add_comment, name='add_comment'),
     url(r'^post-delete/$', delete_post, name='delete_post'),
     url(r'^comment-delete/$', delete_comment, name='delete_comment'),
-
+    url(r'^api/feeds/', include('feeds.api.urls'), name='api-feeds'),
 ]
