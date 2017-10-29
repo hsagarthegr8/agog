@@ -13,6 +13,7 @@ django-crispy-forms==1.7.0
 django-model-utils==3.0.0
 django-sendgrid-v5==0.6.8
 djangorestframework==3.7.1
+djangorestframework-jwt==1.11.0
 docker-py==1.10.6
 docker-pycreds==0.2.1
 dockerpty==0.4.1
@@ -20,6 +21,7 @@ docopt==0.6.2
 docutils==0.14
 easy-thumbnails==2.4.2
 gunicorn==19.7.1
+httpie==0.9.9
 idna==2.6
 ipython==6.2.1
 ipython-genutils==0.2.0
@@ -38,9 +40,11 @@ Pillow==4.3.0
 prompt-toolkit==1.0.15
 ptyprocess==0.5.2
 Pygments==2.2.0
+PyJWT==1.5.3
 python-dateutil==2.6.1
 python-http-client==3.0.0
 pytz==2017.2
+pyuploadcare==2.2.1
 PyYAML==3.12
 requests==2.18.4
 semantic-version==2.6.0
