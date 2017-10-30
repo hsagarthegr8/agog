@@ -19,3 +19,10 @@ class PostDetail(RetrieveUpdateDestroyAPIView):
     serializer_class = PostSerializer
 
 
+class TimelinePosts(ListCreateAPIView):
+    def get_queryset(self):
+        return self.request.user.get_timeline_posts()
+    serializer_class = PostSerializer
+
+
+

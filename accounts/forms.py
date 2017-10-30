@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
+from re import fullmatch
 
 
 User = get_user_model()
@@ -13,7 +14,7 @@ class UserCreationForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'gender', 'date_of_birth',)
+        fields = ('username', 'first_name', 'last_name', 'email', 'contact_no','gender', 'date_of_birth',)
 
     def clean_password2(self):
         # Check that the two password entries match
@@ -22,6 +23,14 @@ class UserCreationForm(forms.ModelForm):
         if password1 and password2 and password1 != password2:
             raise forms.ValidationError("Passwords don't match")
         return password2
+
+    def clean_username(self):
+        username = self.cleaned_data.get("username")
+        if fullmatch('\w+',username):
+            return username.lower()
+        raise forms.ValidationError("Username can't contain special characters")
+
+
 
     def save(self, commit=True):
         # Save the provided password in hashed format
@@ -47,9 +56,6 @@ class UserChangeForm(forms.ModelForm):
         # This is done here, rather than on the field, because the
         # field does not have access to the initial value
         return self.initial["password"]
-
-    def get_ratings(self):
-        return self.userrating_set.aggregate(models.Avg('rating'))['rating__avg']
 
     def get_count(self):
         return self.userrating_set.all().count()

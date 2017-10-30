@@ -7,18 +7,7 @@
     <form method="post">
         {{ form.non_field_errors }}
         {% csrf_token %}
-        <fieldset class="form-group">
-            <div class="row">
-            <div class="col-sm-2">{{ form.username.label_tag }}</div>
-            <div class="col-sm-3">{{ form.username }}</div>
-            </div>
-        </fieldset>
-        <fieldset class="form-group">
-            <div class="row">
-            <div class="col-sm-2">{{ form.password.label_tag }}</div>
-            <div class="col-sm-3">{{ form.password }}</div>
-            </div>
-        </fieldset>
+        {% include 'utils/snippets/form.html' %}
         <div class="row">
             <div class="col-sm-2"></div>
             <div class="col-sm-3">
@@ -27,5 +16,6 @@
             </div>
         </div>
     </form>
+
 
 {% endblock %}

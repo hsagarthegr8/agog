@@ -41,17 +41,6 @@
     color:white;
 }
 
-.myjumbo {
-    background-color: inherit;
-}
-
-.forgot {
-    background-color: inherit;
-}
-
-.content {
-    color: white;
-}
 
 table.borderless td,table.borderless th{
      border: none !important;
@@ -63,4 +52,14 @@ tr {
 
 input,option{
     background-color: transparent;
+}
+
+.jumbotron {
+    background: transparent;
+    margin-top: 10em;
+}
+
+
+.btn {
+    background: inherit;
 }

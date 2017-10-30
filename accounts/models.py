@@ -55,12 +55,12 @@ class MyUserManager(BaseUserManager):
 
 class User(AbstractBaseUser):
     username = models.CharField(max_length=40, unique=True,
-                                help_text = 'username can only contains lowercase alphabets and numbers')
+                                help_text = 'Username can only contains alphabets and numbers')
     first_name = models.CharField(verbose_name='First Name',max_length=40,blank=False,null=False)
     last_name = models.CharField(verbose_name='Last Name',max_length=40,blank = True,)
     full_name = models.CharField(verbose_name='Full Name', max_length=100, null=True, blank=True)
     email = models.EmailField(verbose_name='email address',max_length=255,unique=True,)
-    contact_number = models.CharField(verbose_name='Contact Number', max_length=10, null=True,unique=True)
+    contact_no = models.CharField(verbose_name='Contact Number', max_length=10, null=True,unique=True)
     Gender = [('M','Male'),('F','Female')]
     gender = models.CharField(max_length=1,choices=Gender,null = False)
     date_of_birth = models.DateField(help_text='Date of Birth in the format yyyy-mm-dd')

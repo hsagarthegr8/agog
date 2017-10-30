@@ -15,27 +15,23 @@
                     <div class="navbar-header">
                         <a class="navbar-brand" href="#">Agog</a>
                     </div>
-                    <form class="navbar-form navbar-right" method="post" action="{% url 'accounts:loginit' %}">
+                    <form class="navbar-form navbar-right" method="post" action="{% url 'accounts:login' %}">
                         <div class="form-group">
                             {% csrf_token %}
-                            <input class="form-control form-input" type="text" placeholder="Username/Email" required="required" name="username">
+                            <input class="form-control form-input" type="text" placeholder="Username" required="required" name="username">
                             <input class="form-control form-input" type="password" placeholder="Password" required="required" name="password">
                         </div>
-                        <button type="submit" class="btn btn-sucbcess">Login</button>
-                        <button type="button" class="btn btn-info forgot">Forgot Password</button>
+                        <button type="submit" class="btn btn-primary">Login</button>
+                        <button type="button" class="btn btn-primary">Forgot Password</button>
                     </form>
                 </div>
             </nav>
 
-            <div class="row">
-                <div class="col-sm-8"></div>
-                <!--<div class="col-sm-4">
-                    <table class="table borderless">
-                        <tbody>
-                        {{ form.as_table }}
-                        </tbody>
-                    </table>
-                </div>-->
+            <div class="jumbotron">
+                <div class="text-center">
+                    <h2>Agog - A platform for friends and family.</h2>
+                    <button class="btn btn-primary"><a href="{% url 'accounts:register' %}">Join Us</a></button>
+                </div>
             </div>
 
         </div>

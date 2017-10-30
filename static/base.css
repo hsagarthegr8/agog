@@ -146,3 +146,8 @@
 .hidden-form {
     display: none;
 }
+
+
+.form-help {
+    color: #3b5999;
+}
