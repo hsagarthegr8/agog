@@ -9,9 +9,10 @@
     <form method="post" >
         {{ form.non_field_errors }}
         {% csrf_token %}
-        {% include 'utils/snippets/form.html' %}
-                <button type="reset" class="btn btn-outline-primary">Reset</button>
-                <button type="submit" class="btn btn-outline-primary">Login</button>
+        {{ form.username }}
+        {{ form.password }}
+        <button type="reset" class="btn btn-outline-primary">Reset</button>
+        <button type="submit" class="btn btn-outline-primary">Login</button>
     </form>
     </div>
 

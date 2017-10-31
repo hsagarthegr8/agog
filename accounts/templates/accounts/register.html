@@ -4,16 +4,19 @@
 {% block content %}
     <div class="card center">
     <h2>Register Here</h2>
-    <form method="post" action="#" >
+    <form method="post" >
         {% csrf_token %}
-        {% include 'utils/snippets/form.html' %}
-        <div class="row">
-            <div class="col-sm-2"></div>
-            <div class="col-sm-3">
-                <button type="reset" class="btn btn-outline-primary">Reset</button>
-                <button type="submit" class="btn btn-outline-primary">Register Now</button>
-            </div>
-        </div>
+        {{ form.username }}
+        {{ form.first_name }}
+        {{ form.last_name }}
+        {{ form.email }}
+        {{ form.contact_no }}
+        {{ form.gender.1 }}
+        {{ form.gender.2 }}
+        {{ form.date_of_birth }}
+        {{ form.password1 }}
+        {{ form.password2 }}
+        <button type="submit">Register</button>
     </form>
     </div>
 {% endblock %}

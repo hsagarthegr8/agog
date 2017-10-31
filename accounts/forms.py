@@ -12,6 +12,8 @@ class UserCreationForm(forms.ModelForm):
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput(attrs={'placeholder':'Password'}))
     password2 = forms.CharField(label='Confirm Password',
                                 widget=forms.PasswordInput(attrs={'placeholder':'Confirm Password'}))
+    CHOICES = (('M','Male'),('F','Female'),)
+
 
     class Meta:
         model = User
@@ -22,9 +24,8 @@ class UserCreationForm(forms.ModelForm):
             'last_name': forms.TextInput(attrs={'placeholder': 'Last Name'}),
             'email': forms.TextInput(attrs={'placeholder': 'Email'}),
             'contact_no': forms.TextInput(attrs={'placeholder': 'Contact Number'}),
-            'date_of_birth': forms.TextInput(attrs={'placeholder': 'Date of Birth'}),
-
-
+            'gender':forms.RadioSelect(),
+            'date_of_birth': forms.SelectDateWidget(attrs={'class':'list-inline-item'})
         }
 
     def clean_password2(self):
