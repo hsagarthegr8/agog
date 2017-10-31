@@ -10,5 +10,4 @@ urlpatterns = [
     url('^loginit/$', loginit, name='loginit' ),
     url('^logout/$',LogoutView.as_view(), name='logout'),
     url('^activate/(?P<username>[a-z,0-9]+)/(?P<activation_key>[\w]+)/$', activation, name='activate'),
-    url('^api/', include('accounts.api.urls'), name='api-accounts'),
 ]

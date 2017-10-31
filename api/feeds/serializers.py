@@ -3,7 +3,6 @@ from feeds.models import Post
 
 
 class PostSerializer(serializers.ModelSerializer):
-    posted_by = serializers.ReadOnlyField(source='posted_by.username')
 
     class Meta:
         model = Post

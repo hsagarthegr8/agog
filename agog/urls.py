@@ -22,11 +22,12 @@ from .views import HomeView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', HomeView.as_view(), name='home'),
-    url(r'^', include('profiles.urls'), name='profiles'),
-    url('^accounts/', include('accounts.urls'), name='accounts'),
-    url(r'^', include('feeds.urls'), name='feeds'),
-    url(r'^', include('utils.urls'), name='utils'),
+    url(r'^api/',include('api.urls')),
+    url(r'^$', HomeView.as_view(),name='home'),
+    url(r'^', include('profiles.urls')),
+    url('^accounts/', include('accounts.urls')),
+    url(r'^', include('feeds.urls')),
+    url(r'^', include('utils.urls')),
     url(r'^', include('connections.urls'), name='connections'),
     url(r'^ratings/', include('star_ratings.urls', namespace='ratings', app_name='ratings')),
 

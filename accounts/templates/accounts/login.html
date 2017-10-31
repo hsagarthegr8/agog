@@ -3,19 +3,16 @@
 {% block title %}{{ block.super }} - Login{% endblock %}
 
 {% block content %}
+    <div class="card center">
     <h2>Login Here</h2>
-    <form method="post">
+        <br/>
+    <form method="post" >
         {{ form.non_field_errors }}
         {% csrf_token %}
         {% include 'utils/snippets/form.html' %}
-        <div class="row">
-            <div class="col-sm-2"></div>
-            <div class="col-sm-3">
                 <button type="reset" class="btn btn-outline-primary">Reset</button>
                 <button type="submit" class="btn btn-outline-primary">Login</button>
-            </div>
-        </div>
     </form>
-
+    </div>
 
 {% endblock %}

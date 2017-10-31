@@ -3,37 +3,42 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>AGOG-A platform for friends and family</title>
+        <title>Agog-A plateform for friends and family.</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <link rel="stylesheet" href="{% static 'home.css' %}"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'home.css' %}">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     </head>
-    <body>
-        <div class="body">
-            <nav class="navbar navbar-inverse mynav">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <a class="navbar-brand" href="#">Agog</a>
-                    </div>
-                    <form class="navbar-form navbar-right" method="post" action="{% url 'accounts:login' %}">
-                        <div class="form-group">
-                            {% csrf_token %}
-                            <input class="form-control form-input" type="text" placeholder="Username" required="required" name="username">
-                            <input class="form-control form-input" type="password" placeholder="Password" required="required" name="password">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Login</button>
-                        <button type="button" class="btn btn-primary">Forgot Password</button>
-                    </form>
-                </div>
-            </nav>
 
-            <div class="jumbotron">
-                <div class="text-center">
-                    <h2>Agog - A platform for friends and family.</h2>
-                    <button class="btn btn-primary"><a href="{% url 'accounts:register' %}">Join Us</a></button>
-                </div>
+    <body>
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+        <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'images/logo.svg' %}" class="logo"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+            </ul>
+
+            <form class="form-inline" method="post" action="{% url 'accounts:login' %}">
+                {% csrf_token %}
+                <input type="text" class="form-control" placeholder="Username" name="username" size="15em" required>
+                <input type="password" class="form-control" placeholder="Password" name="password" size="15em" required>
+                <button type="submit" class="form-control btn btn-outline-primary">Log in</button>
+                <a class="btn btn-outline-primary" role="button" href="#">Forgot Password?</a>
+            </form>
+        </div>
+        </nav>
+
+        <div class="jumbotron">
+            <div class="text-center">
+                <h2>A platform for friends and family.</h2>
+                <a href="{% url 'accounts:register' %}" class="btn btn-outline-primary" role="button">Join Us</a>
             </div>
 
         </div>
+            {% include 'snippets/js.html' %}
+            <script src="{% static 'js/base.js' %}"></script>
     </body>
 </html>

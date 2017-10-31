@@ -2,9 +2,9 @@
 {% block title %}Register User{% endblock %}
 
 {% block content %}
-
+    <div class="card center">
     <h2>Register Here</h2>
-    <form method="post" action="#">
+    <form method="post" action="#" >
         {% csrf_token %}
         {% include 'utils/snippets/form.html' %}
         <div class="row">
@@ -15,5 +15,5 @@
             </div>
         </div>
     </form>
-
+    </div>
 {% endblock %}

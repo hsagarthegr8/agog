@@ -1,65 +1,14 @@
-.body:before {
-    content: "";
-    position: fixed;
-    left: 0;
-    right: 0;
-    z-index: -1;
-
-    background-image: url('images/home.jpg');
-    height: 1080px;
-    width: 1920px;
-    background-repeat: no-repeat;
-    background-size:contain;
-
-    -webkit-filter: blur(2px);
-    -moz-filter: blur(2px);
-    -o-filter: blur(2px);
-    -ms-filter: blur(2px);
-    filter: blur(2px);
-
+.nav-avatar {
+    height:2rem;
+    border: solid 1px;
 }
 
-.body {
-  position: fixed;
-  left: 0;
-  right: 0;
-  z-index: 0;
-  margin-left: 20px;
-  margin-right: 20px;
+.logo {
+    height:30px;
+    background-color: white;
 }
 
-.body:hover {
-
-}
-.mynav {
-    background-color: inherit;
-    border: transparent;
+.form-control {
+    margin-right:0.5em;
 }
 
-.form-input {
-    background-color: inherit;
-    color:white;
-}
-
-
-table.borderless td,table.borderless th{
-     border: none !important;
-}
-
-tr {
-    color:white;
-}
-
-input,option{
-    background-color: transparent;
-}
-
-.jumbotron {
-    background: transparent;
-    margin-top: 10em;
-}
-
-
-.btn {
-    background: inherit;
-}

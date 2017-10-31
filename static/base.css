@@ -151,3 +151,18 @@
 .form-help {
     color: #3b5999;
 }
+
+.center{
+    max-width: 500px;
+    margin: auto;
+    margin-top: 10em;
+    text-align: center;
+    padding: 1em;
+}
+
+
+
+
+.register {
+
+}

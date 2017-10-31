@@ -9,12 +9,23 @@ User = get_user_model()
 class UserCreationForm(forms.ModelForm):
     """A form for creating new users. Includes all the required
     fields, plus a repeated password."""
-    password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Confirm Password', widget=forms.PasswordInput)
+    password1 = forms.CharField(label='Password', widget=forms.PasswordInput(attrs={'placeholder':'Password'}))
+    password2 = forms.CharField(label='Confirm Password',
+                                widget=forms.PasswordInput(attrs={'placeholder':'Confirm Password'}))
 
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name', 'email', 'contact_no','gender', 'date_of_birth',)
+        widgets = {
+            'username': forms.TextInput(attrs={'placeholder':'Username'}),
+            'first_name': forms.TextInput(attrs={'placeholder': 'First Name'}),
+            'last_name': forms.TextInput(attrs={'placeholder': 'Last Name'}),
+            'email': forms.TextInput(attrs={'placeholder': 'Email'}),
+            'contact_no': forms.TextInput(attrs={'placeholder': 'Contact Number'}),
+            'date_of_birth': forms.TextInput(attrs={'placeholder': 'Date of Birth'}),
+
+
+        }
 
     def clean_password2(self):
         # Check that the two password entries match

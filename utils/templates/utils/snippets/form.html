@@ -1,12 +1,14 @@
 {% for field in form %}
-    <fieldset class="form-group">
-        <div class="row">
-        <div class="col-sm-2">{{ field.label_tag }}</div>
-        <div class="col-sm-3">{{ field }}</div>
+    <div class="row">
+    <fieldset class="form-group login-form">
+        {{ field }}
             {% if field.help_text %}
-                <span class="form-help">{{ field.help_text|safe }}</span>
+                <script>
+                $("#{{ field.auto_id }}").attr("title","{{ field.help_text }}");
+                </script>
             {% endif %}
             {{ field.errors }}
-        </div>
     </fieldset>
+    </div>
 {% endfor %}
+
