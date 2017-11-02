@@ -1,9 +1,11 @@
-from django.views.generic import DetailView
+from django.views.generic import DetailView, CreateView
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import get_object_or_404,redirect,reverse
+from django.shortcuts import get_object_or_404,redirect
+from django.urls import reverse_lazy
 
 User = get_user_model()
+from .forms import ProfileForm
 
 
 class TimelineView(LoginRequiredMixin,DetailView):
@@ -31,3 +33,9 @@ class SettingsView(LoginRequiredMixin, DetailView):
 
     def get_object(self, queryset=None):
         return User.objects.get(username=self.request.user)
+
+
+class CreateProfile(CreateView):
+    form_class = ProfileForm
+    success_url = reverse_lazy('profiles:timeline')
+    template_name = 'profiles/createprofile.html'

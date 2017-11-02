@@ -1,0 +1,1 @@
+Rename agog/settings/local-bak.py to agog/settings/local.py

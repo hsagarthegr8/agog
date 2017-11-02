@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {{ form.media }}
+    <form method="post" action>
+        {% csrf_token %}
+        <input type="hidden" name="user" value="{{ request.user.id }}"/>
+        {{ form.image.label_tag }}{{ form.image }}
+        {{ form.lives_in.label_tag }}{{ form.lives_in }}
+        {{ form.hometown.label_tag }}{{ form.hometown }}
+        {{ form.relationship.label_tag }}
+        {{ form.relationship.1 }}
+        {{ form.relationship.2 }}
+        {{ form.interests.label_tag }}{{ form.interests }}
+        {{ form.about.label_tag }}{{ form.about }}
+        <button type="submit">Submit</button>
+    </form>
+{% endblock %}

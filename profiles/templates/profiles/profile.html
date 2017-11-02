@@ -4,26 +4,20 @@
 
 {% block content %}
     {% if object in request.user.get_blocked_users %}
-        <div class="card text-center">
+        <div class="card text-center shadow">
             <i class="fa fa-eye-slash" style="font-size:108px"></i>
             <span style="font-size: 30px;">You have blocked this user. So you cannot view each others activities.
                 To unblock the user, Go to <a href="{% url 'profiles:settings' %}">settings</a></span>
         </div>
     {% else %}
-    <div class="card">
+    <div class="card shadow">
         <p></p>
         <div class="row">
             <div class="col-sm-3"></div>
             <div class="col-sm-6">
             <div class="text-center">
-            <img class="rounded-circle profile-picture"
-            {% if object.profile.image %}
-                src="{{ object.profile.image.url }}" style="width: 150px ; height: 150px ; border:solid 1px" />
-            {% elif object.gender == "M" %}
-                src="{% static 'profiles/avatars/male.svg' %}" style="width: 150px ; height: 150px ; border:solid 1px" />
-            {% else %}
-                src="{% static 'profiles/avatars/female.svg' %}" style="width: 150px ; height: 150px ; border:solid 1px" />
-            {% endif %}
+            <img class="rounded-circle profile-picture" {% include 'profiles/snippets/profile-img.html' %}
+            style="width: 150px ; height: 150px ; border:solid 1px" />
             <span class="text-right">
 
             </span>
@@ -48,7 +42,7 @@
         </div>
     </div>
     <hr/>
-    <div class="card about-profile">
+    <div class="card about-profile ">
         <h2 class="text-center">About</h2>
         <ul>
             <li>born on {{ object.date_of_birth }}</li>
@@ -69,7 +63,7 @@
             {% include 'feeds/post.html' with posts=object.get_posts redirect_to='profile' %}
         </div>
         <div class="col-sm-3">
-            <div class="card" style="margin-top: 1em">
+            <div class="card" >
                 Sponsored by Offshot
             </div>
         </div>

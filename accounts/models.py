@@ -13,7 +13,7 @@ from .emails import ActivationEmail
 
 
 class MyUserManager(BaseUserManager):
-    def create_user(self, username, first_name, last_name, email, gender, date_of_birth, password=None):
+    def create_user(self, username, first_name, last_name, email, contact_no, gender, date_of_birth, password=None):
         """
         Creates and saves a User with the given email, date of
         birth and password.
@@ -26,6 +26,7 @@ class MyUserManager(BaseUserManager):
             first_name = first_name,
             last_name = last_name,
             email=self.normalize_email(email),
+            contact_no = contact_no,
             gender = gender,
             date_of_birth=date_of_birth,
         )
@@ -34,7 +35,7 @@ class MyUserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, username, first_name, last_name, email, gender, date_of_birth, password):
+    def create_superuser(self, username, first_name, last_name, email, contact_no,gender, date_of_birth, password):
         """
         Creates and saves a superuser with the given email, date of
         birth and password.
@@ -44,6 +45,7 @@ class MyUserManager(BaseUserManager):
             first_name=first_name,
             last_name=last_name,
             email=email,
+            contact_no=contact_no,
             gender=gender,
             password=password,
             date_of_birth=date_of_birth,
@@ -60,7 +62,7 @@ class User(AbstractBaseUser):
     last_name = models.CharField(verbose_name='Last Name',max_length=40,blank = True,)
     full_name = models.CharField(verbose_name='Full Name', max_length=100, null=True, blank=True)
     email = models.EmailField(verbose_name='email address',max_length=255,unique=True,)
-    contact_no = models.CharField(verbose_name='Contact Number', max_length=10, null=True,unique=True)
+    contact_no = models.CharField(verbose_name='Contact Number', max_length=10, unique=True)
     Gender = [('M','Male'),('F','Female')]
     gender = models.CharField(max_length=1,choices=Gender,null = False)
     date_of_birth = models.DateField(help_text='Date of Birth in the format yyyy-mm-dd')
@@ -72,7 +74,7 @@ class User(AbstractBaseUser):
     objects = MyUserManager()
 
     USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = ['first_name','last_name','email','gender','date_of_birth']
+    REQUIRED_FIELDS = ['first_name','last_name','email','gender','date_of_birth','contact_no']
 
     def save(self, *args, **kwargs):
         self.full_name = self.first_name +' '+self.last_name

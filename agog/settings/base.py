@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'connections.apps.ConnectionsConfig',
     'star_ratings.apps.StarRatingsAppConfig',
     'rest_framework',
+    'pyuploadcare.dj',
 ]
 
 MIDDLEWARE = [
@@ -151,7 +152,7 @@ STAR_RATINGS_STAR_WIDTH = STAR_RATINGS_STAR_HEIGHT
 EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
 SENDGRID_API_KEY = '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'
 
-
+#Rest_Framework
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
@@ -161,4 +162,12 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
     ),
+}
+
+
+#Uploadcare
+UPLOADCARE = {
+    'pub_key': '0b7b72b0603cecc6a0cd',
+    'secret': 'abf19237966a0b631ef0',
+    'widget_version': '3.2.0',
 }

@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from re import fullmatch
+from datetime import datetime
 
 
 User = get_user_model()
@@ -17,6 +18,7 @@ class UserCreationForm(forms.ModelForm):
 
     class Meta:
         model = User
+        YEARS = [year for year in range(datetime.now().year, datetime.now().year - 100, -1)]
         fields = ('username', 'first_name', 'last_name', 'email', 'contact_no','gender', 'date_of_birth',)
         widgets = {
             'username': forms.TextInput(attrs={'placeholder':'Username'}),
@@ -25,7 +27,7 @@ class UserCreationForm(forms.ModelForm):
             'email': forms.TextInput(attrs={'placeholder': 'Email'}),
             'contact_no': forms.TextInput(attrs={'placeholder': 'Contact Number'}),
             'gender':forms.RadioSelect(),
-            'date_of_birth': forms.SelectDateWidget(attrs={'class':'list-inline-item'})
+            'date_of_birth': forms.SelectDateWidget(years=YEARS, attrs={'class':'list-inline-item'})
         }
 
     def clean_password2(self):
