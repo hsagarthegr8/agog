@@ -1,0 +1,13 @@
+<div class="card">
+    <div class="card-header">Recent Activities</div>
+    <div class="card-body">
+        {% for activity in recents %}
+            {% if activity.action == 'Posted' %}
+                <p style="margin-bottom: 2em">You posted on {{ activity.user2 }} timeline.
+                    <small class="pull-right">{{ activity.timestamp }}</small></p>
+            {% endif %}
+        {% empty %}
+            No Recent Activity.
+        {% endfor %}
+    </div>
+</div>

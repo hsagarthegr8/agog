@@ -1,5 +1,5 @@
 {% load static %}
-<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top" style="position: relative">
     <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'images/logo.svg' %}" class="logo"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -37,13 +37,9 @@
 
                 <div class="nav-item dropdown">
                     <a class="nav-link " href="http://example.com" id="notifications" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-bell"></i>
+                        <i class="fa fa-bell fa-lg"></i>
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="notifications">
-                        <a class="dropdown-item" href="{% url 'profiles:profile' %}">Profile</a>
-                        <a class="dropdown-item" href="#">Settings</a>
-                        <a class="dropdown-item" href="{% url 'accounts:logout' %}">Logout</a>
-                    </div>
+                    {% include 'activityfeeds/notifications.html' %}
                 </div>
             {% endif %}
         </ul>
@@ -51,7 +47,7 @@
             {% if request.user.is_authenticated %}
                 <li class="nav-item dropdown">
                     <a class="nav-link" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img class="rounded-circle nav-avatar" {% include 'profiles/snippets/profile-img.html' with object=request.user %} />
+                        <img class="rounded-circle nav-avatar" src="{{ request.user.get_profile_picture }}" />
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown01">
                         <a class="dropdown-item" href="{% url 'profiles:profile' %}">Profile</a>

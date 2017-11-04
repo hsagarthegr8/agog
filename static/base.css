@@ -157,3 +157,35 @@
 .shadow-btn:hover {
     box-shadow: 0.1em 0.1em 0.4em rgba(0, 0, 0, 0.2);
 }
+
+.borderless td {
+    border: none;
+}
+
+.borderless {
+    margin-left: 1em;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+.last {
+    height:2em;
+}
+
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    line-height: 60px; /* Vertically center the text there */
+    background-color: #f5f5f5;
+}

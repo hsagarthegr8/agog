@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'star_ratings.apps.StarRatingsAppConfig',
     'rest_framework',
     'pyuploadcare.dj',
+    'activityfeeds.apps.ActivityfeedsConfig',
 ]
 
 MIDDLEWARE = [
@@ -114,7 +115,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
@@ -171,3 +172,4 @@ UPLOADCARE = {
     'secret': 'abf19237966a0b631ef0',
     'widget_version': '3.2.0',
 }
+

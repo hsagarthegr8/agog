@@ -1,8 +1,0 @@
-{% load static %}
-    {% if object.profile.image %}
-        src="{{ object.profile.image.cdn_url }}"
-    {% elif object.gender == "M" %}
-        src="{% static 'profiles/avatars/male.svg' %}"
-    {% else %}
-        src="{% static 'profiles/avatars/female.svg' %}"
-    {% endif %}

@@ -1,7 +1,7 @@
 {% load static %}
 {% include 'feeds/add_post_form.html' %}
     {% for post in posts %}
-    <div class="card post"  >
+    <div class="card post">
         <div class="card-header">
             <a href="{% url 'profiles:profile' username=post.posted_by.username %}">
                 {% if post.posted_by == request.user %}
@@ -19,7 +19,7 @@
                 {% elif post.posted_on == post.posted_by and post.posted_on.gender == 'F' %}
                     her
                 {% else %}
-                    {{ post.posted_on.get_full_name }}
+                    {{ post.posted_on.get_full_name }}'s
                 {% endif %}
             </a> timeline.
             <span class="text-right"><small>{{ post.timestamp }}</small></span>

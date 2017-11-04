@@ -5,6 +5,9 @@
         <meta charset="UTF-8">
         <title>{% block title %}Agog{% endblock %}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" type="image/png" href="{% static 'favicon/favicon-16x16.png' %}" sizes="16x16">
+        <link rel="icon" type="image/png" href="{% static 'favicon/favicon-32x32.png' %}" sizes="32x32">
+        <link rel="icon" type="image/png" href="{% static 'favicon/favicon-96x96.png' %}" sizes="96x96">
         {% include 'snippets/css.html' %}
         {% include 'snippets/head-js.html' %}
     </head>
@@ -20,11 +23,12 @@
         {% endif %}
         {% include 'snippets/nav.html' %}
         <p></p>
-        <div class ="container">
+        <main role="main" class ="container">
             {% block content %}
             {% endblock %}
-        </div>
-
+        </main>
+        <p class="last"></p>
+        {% include 'snippets/footer.html' %}
         {% include 'snippets/js.html' %}
     </body>
 </html>

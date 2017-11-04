@@ -1,0 +1,22 @@
+    <div class="dropdown-menu request-nav " aria-labelledby="notifications" style=" width: 10cm; height: 10cm;" >
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Notifications</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for notification in notifications %}
+                <tr>
+                    <td>
+                        <a href="{% url 'profiles:profile' notification.user1.username %}">
+                            {{ notification.user1.get_full_name }}
+                        </a>
+                        posted on your timeline.
+                        <small class="pull-right">{{ notification.timestamp }}</small>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

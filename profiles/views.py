@@ -6,9 +6,10 @@ from django.urls import reverse_lazy
 
 User = get_user_model()
 from .forms import ProfileForm
+from activityfeeds.mixins import ActivityMixin
 
 
-class TimelineView(LoginRequiredMixin,DetailView):
+class TimelineView(LoginRequiredMixin, ActivityMixin, DetailView):
     model = User
     template_name = 'profiles/timeline.html'
 
@@ -16,7 +17,7 @@ class TimelineView(LoginRequiredMixin,DetailView):
         return User.objects.get(username = self.request.user)
 
 
-class ProfileView(LoginRequiredMixin, DetailView):
+class ProfileView(LoginRequiredMixin, ActivityMixin, DetailView):
     model = User
     template_name = 'profiles/profile.html'
 
@@ -27,7 +28,7 @@ class ProfileView(LoginRequiredMixin, DetailView):
         return User.objects.get(username=self.request.user)
 
 
-class SettingsView(LoginRequiredMixin, DetailView):
+class SettingsView(LoginRequiredMixin, ActivityMixin, DetailView):
     model = User
     template_name = 'profiles/settings.html'
 
@@ -35,7 +36,7 @@ class SettingsView(LoginRequiredMixin, DetailView):
         return User.objects.get(username=self.request.user)
 
 
-class CreateProfile(CreateView):
+class CreateProfile(LoginRequiredMixin,CreateView):
     form_class = ProfileForm
     success_url = reverse_lazy('profiles:timeline')
     template_name = 'profiles/createprofile.html'

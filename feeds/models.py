@@ -3,6 +3,8 @@ from django.conf import settings
 
 User = settings.AUTH_USER_MODEL
 
+from activityfeeds.models import log
+
 
 class Post(models.Model):
     posted_by = models.ForeignKey(User,on_delete=models.CASCADE,verbose_name='Posted By',related_name='post_set')
@@ -13,6 +15,14 @@ class Post(models.Model):
 
     class Meta:
         ordering=['-timestamp','-updated']
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            log(user1=self.posted_by, user2=self.posted_on, action='Posted')
+        else:
+            log(user1=self.posted_by, user2=self.posted_on, action='Updated Post')
+        super(Post, self).save(*args, **kwargs)
+
     def __str__(self):
         return self.posted_by.username +' - '+ self.message
 

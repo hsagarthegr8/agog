@@ -7,6 +7,8 @@ from django.dispatch import receiver
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser
 )
+from django.contrib.staticfiles.templatetags.staticfiles import static
+
 
 from feeds.models import Post
 from .emails import ActivationEmail
@@ -147,6 +149,16 @@ class User(AbstractBaseUser):
         for blocks in self.blocklist.all():
             users.append(blocks.user2)
         return users
+
+    def get_profile_picture(self):
+        try:
+            return self.profile.image.cdn_url
+        except:
+            if self.gender=='M':
+                return static('profiles/avatars/male.svg')
+            else:
+                return static('profiles/avatars/female.svg')
+
 
 from django.utils.crypto import get_random_string
 

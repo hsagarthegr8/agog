@@ -9,7 +9,7 @@
         <div class="card card-profile text-center">
     <img class="card-img-top" src="https://unsplash.it/340/160?image=354"/>
     <div class="card-block">
-        <img class="card-img-profile" {% include 'profiles/snippets/profile-img.html' %}
+        <img class="card-img-profile" src="{{ object.get_profile_picture }}"
              style="width: 150px ; height: 150px ; border:solid 1px" />
 
         <h4 class="card-title">
@@ -25,7 +25,8 @@
             {% include 'feeds/post.html' with posts=object.get_timeline_posts redirect_to='timeline' %}
         </div>
         <div class="col-sm-3">
-            <div class="card">
+            {% include 'activityfeeds/recents.html' %}
+            <div class="card" style="margin-top: 1em">
                 Sponsored by Offshot
             </div>
         </div>
