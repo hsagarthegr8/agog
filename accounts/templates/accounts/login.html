@@ -1,16 +1,23 @@
 
 {% extends 'base.html' %}
 {% block title %}{{ block.super }} - Login{% endblock %}
-
 {% block content %}
-    <div class="card center">
+    <div class="card center login-block">
     <h2>Login Here</h2>
         <br/>
-    <form method="post" >
+    <form method="post" class="login">
         {{ form.non_field_errors }}
         {% csrf_token %}
-        {{ form.username }}
-        {{ form.password }}
+        <div class="input-group username">
+            <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i> </span>
+            <input type="text" class="form-control" name="username" autofocus maxlength="254" required id="id_username" placeholder="Username" />
+        </div>
+        <br/>
+        <div class="input-group password">
+            <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i> </span>
+            <input class="form-control" type="password" name="password" required id="id_password" placeholder="Password" /><br>
+        </div>
+        <br/>
         <button type="reset" class="btn btn-outline-primary">Reset</button>
         <button type="submit" class="btn btn-outline-primary">Login</button>
     </form>
