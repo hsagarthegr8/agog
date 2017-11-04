@@ -10,5 +10,5 @@ class SearchView(ListView):
 
     def get(self, request, *args, **kwargs):
         query = request.GET.get('q')
-        self.queryset = User.objects.filter(full_name__icontains=query)
+        self.queryset = User.objects.filter(full_name__icontains=query).exclude(username=self.request.user.username)
         return super(SearchView, self).get(request,*args,**kwargs)

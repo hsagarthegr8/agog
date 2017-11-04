@@ -8,11 +8,7 @@
         <div class="card card-profile text-center">
             <img class="card-img-top" src="https://unsplash.it/340/160?image=354"/>
             <div class="card-block">
-                {% if object.gender == "M" %}
-                    <img class="card-img-profile" src="{% static 'profiles/avatars/male.svg' %}" style="width: 150px ; height: 150px ; border:solid 1px" />
-                {% else %}
-                    <img class="card-img-profile" src="{% static 'profiles/avatars/female.svg' %}" style="width: 150px ; height: 150px ; border:solid 1px" />
-                {% endif %}
+                    <img class="card-img-profile" src="{{ object.get_profile_picture }}" style="width: 150px ; height: 150px ; border:solid 1px" />
                 <h4 class="card-title">
                     {{ object.full_name }}
                     <small><a class="card-links" href="{{ object.get_absolute_url }}">@{{ object.username }}</a> </small>
