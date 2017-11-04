@@ -133,11 +133,19 @@
 }
 
 .center{
-    max-width: 500px;
     margin: auto;
-    margin-top: 10em;
-    text-align: center;
     padding: 1em;
+}
+
+.login-block {
+    text-align: center;
+    margin-top:10em;
+    max-width:400px;
+}
+
+.registration-block {
+    max-width: 600px;
+    margin-top:5em;
 }
 
 
@@ -157,3 +165,9 @@
 .shadow-btn:hover {
     box-shadow: 0.1em 0.1em 0.4em rgba(0, 0, 0, 0.2);
 }
+
+.login .username, .login .password{
+    max-width: 70%;
+    margin: auto;
+}
+
