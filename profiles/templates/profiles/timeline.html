@@ -6,7 +6,7 @@
 {% block content %}
     <div class="row">
         <div class="col-sm-3">
-        <div class="card card-profile text-center">
+        <div class="card card-profile text-center sticky-top" style="top:5em;">
     <img class="card-img-top" src="https://unsplash.it/340/160?image=354"/>
     <div class="card-block">
         <img class="card-img-profile" src="{{ object.get_profile_picture }}"
@@ -24,11 +24,8 @@
         <div class="col-sm-6 col-md-6 col-lg-6">
             {% include 'feeds/post.html' with posts=object.get_timeline_posts redirect_to='timeline' %}
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-3" style="margin-top: 1em">
             {% include 'activityfeeds/recents.html' %}
-            <div class="card" style="margin-top: 1em">
-                Sponsored by Offshot
-            </div>
         </div>
     </div>
 
