@@ -2,7 +2,7 @@ from django.shortcuts import redirect, reverse,get_object_or_404
 from django.http import HttpResponseRedirect
 from django.contrib.auth import get_user_model
 
-from .models import Post, Comment
+from .models import Post, Response
 
 User = get_user_model()
 
@@ -24,18 +24,18 @@ def delete_post(request):
     return HttpResponseRedirect(next)
 
 
-def add_comment(request):
+def add_response(request):
     post_id = int(request.POST['post'])
     post = Post.objects.get(id=post_id)
-    comment = request.POST['comment']
-    Comment.objects.create(commented_by=request.user,post=post,comment=comment)
+    response = request.POST['response']
+    Response.objects.create(responded_by=request.user,post=post,response=response)
     next = request.POST.get('next', '/')
     return HttpResponseRedirect(next)
 
 
-def delete_comment(request):
-    comment_id = int(request.POST['comment'])
-    comment = Comment.objects.get(id=comment_id)
-    comment.delete()
+def delete_response(request):
+    response_id = int(request.POST['response'])
+    response = Response.objects.get(id=response_id)
+    response.delete()
     next = request.POST.get('next', '/')
     return HttpResponseRedirect(next)

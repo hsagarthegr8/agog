@@ -1,4 +1,4 @@
-    <div class="dropdown-menu request-nav " aria-labelledby="notifications" style=" width: 10cm; height: 10cm;" >
+    <div class="dropdown-menu request-nav " aria-labelledby="notifications" style=" width: 10cm; height: 10cm; right: -7cm; left: auto;" >
     <table class="table table-striped">
         <thead>
         <tr>
@@ -13,7 +13,7 @@
                             {{ notification.user1.get_full_name }}
                         </a>
                         posted on your timeline.
-                        <small class="pull-right">{{ notification.timestamp }}</small>
+                        <small class="pull-right">{% include 'utils/timestamp.html' with timestamp=notification.timestamp %}</small>
                     </td>
                 </tr>
             {% endfor %}

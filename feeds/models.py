@@ -27,15 +27,22 @@ class Post(models.Model):
         return self.posted_by.username +' - '+ self.message
 
 
-class Comment(models.Model):
-    commented_by = models.ForeignKey(User, on_delete=models.CASCADE)
+class Response(models.Model):
+    responded_by = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(Post,on_delete=models.CASCADE)
-    comment = models.TextField(max_length=200)
+    response = models.TextField(max_length=200)
     timestamp = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
+    def save(self, *args, **kwargs):
+        if not self.id:
+            log(user1=self.responded_by, user2=self.post.posted_on, action='Responded')
+        else:
+            log(user1=self.responded_by, user2=self.post.posted_on, action='Updated Response')
+        super(Response, self).save(*args, **kwargs)
+
     def __str__(self):
-        return str(self.post) +' - '+ self.commented_by.username +' - ' + self.comment
+        return str(self.post) +' - '+ self.responded_by.username +' - ' + self.response
 
 
 class PostReactions(models.Model):
@@ -52,15 +59,15 @@ class PostReactions(models.Model):
         verbose_name_plural='Post Reactions'
 
 
-class CommentReactions(models.Model):
+class ResponseReactions(models.Model):
     CHOICES = (('A','Angry'),
                ('S','Sad'),
                ('W','Wow'),
                ('H','Haha'),
                ('L','Love'))
-    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
+    response = models.ForeignKey(Response, on_delete=models.CASCADE)
     reacted_by = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
-        unique_together = ['comment','reacted_by']
-        verbose_name_plural = 'Comment Reactions'
+        unique_together = ['response','reacted_by']
+        verbose_name_plural = 'Response Reactions'

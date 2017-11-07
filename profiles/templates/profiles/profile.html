@@ -2,6 +2,7 @@
 {% load static %}
 {% load ratings %}
 
+{% block title %}{{ object.full_name }} - {{block.super }}{% endblock %}
 
 {% block content %}
     {% if object in request.user.get_blocked_users %}
@@ -11,76 +12,78 @@
                 To unblock the user, Go to <a href="{% url 'profiles:settings' %}">settings</a></span>
         </div>
     {% else %}
-    <div class="card shadow">
-        <p></p>
-        <div class="row">
-            <div class="col-sm-3"></div>
-            <div class="col-sm-6">
-            <div class="text-center">
-            <img class="rounded-circle profile-picture" src="{{ object.get_profile_picture }}" style="width: 150px ; height: 150px ; border:solid 1px" />
-            <span class="text-right">
+        <div class="card shadow">
+            <p></p>
+            <div class="row">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-6">
+                <div class="text-center">
+                <img class="rounded-circle profile-picture" src="{{ object.get_profile_picture }}" style="width: 150px ; height: 150px ; border:solid 1px" />
+                <span class="text-right">
 
-            </span>
-            <h3>{{ object.get_full_name }}</h3>
-            <a class="viewsitelink " href="{% url 'profiles:profile' username=object.username  %}">
-                <p>@{{ object.username }}</p>
-            </a>
-            <p>
-            {% if object == request.user %}
-                {% ratings object read_only=1 %}
-            {% else %}
-                {% ratings object %}
-            {% endif %}
-            </p>
-        </div>
+                </span>
+                <h3>{{ object.get_full_name }}</h3>
+                <a class="viewsitelink " href="{% url 'profiles:profile' username=object.username  %}">
+                    <p>@{{ object.username }}</p>
+                </a>
+                <p>
+                {% if object == request.user %}
+                    {% ratings object read_only=1 %}
+                {% else %}
+                    {% ratings object %}
+                {% endif %}
+                </p>
             </div>
-        <div class="col-sm-3">
-            {% if request.user != object %}
-                {% include 'connections/snippets/connection-buttons.html' %}
-            {% endif %}
-        </div>
-        </div>
-    </div>
-    <hr/>
-    <div class="card about-profile ">
-        <p></p>
-        <h3 class="text-center"><small>About</small></h3>
-        <div class="row">
-            <div class="col-sm-6">
-                <table class="table table-sm borderless">
-                    <col width="15%">
-                    <col width="85%">
-                    <tr><td>Gender</td><td>{{ object.get_gender_display }}</td></tr>
-                    <tr><td>Born on</td><td>{{ object.date_of_birth }}</td></tr>
-                    <tr><td>Interests</td><td>{{ object.profile.interests }}</td></tr>
-                    <tr><td>About Me</td><td>{{ object.profile.about }}</td></tr>
-                </table>
+                </div>
+            <div class="col-sm-3">
+                {% if request.user != object %}
+                    {% include 'connections/snippets/connection-buttons.html' %}
+                {% endif %}
             </div>
-            <div class="col-sm-6">
-                <table class="table table-sm borderless">
-                    <col width="20%">
-                    <col width="80%">
-                    <tr><td>Relationship Status</td><td>{{ object.profile.get_relationship_display }}</td></tr>
-                    <tr><td>Lives in</td><td>{{ object.profile.lives_in }}</td></tr>
-                    <tr><td>Hometown</td><td>{{ object.profile.hometown }}</td></tr>
-                </table>
             </div>
         </div>
-
-    </div>
-
-    <div class="row">
-        <div class="col-sm-3">
-            {% include 'connections/snippets/connections.html' %}
-        </div>
-        <div class="col-sm-6">
-            {% include 'feeds/post.html' with posts=object.get_posts redirect_to='profile' %}
-        </div>
-        <div class="col-sm-3">
-            <div class="card" >
-                Sponsored by Offshot
+        <hr/>
+        <div class="card about-profile ">
+            <p></p>
+            <h3 class="text-center"><small>About</small></h3>
+            <div class="row">
+                <div class="col-sm-6">
+                    <table class="table table-sm borderless">
+                        <col width="15%">
+                        <col width="85%">
+                        <tr><td>Gender</td><td>{{ object.get_gender_display }}</td></tr>
+                        <tr><td>Born on</td><td>{{ object.date_of_birth }}</td></tr>
+                        <tr><td>Interests</td><td>{{ object.profile.interests }}</td></tr>
+                        <tr><td>About Me</td><td>{{ object.profile.about }}</td></tr>
+                    </table>
+                </div>
+                <div class="col-sm-6">
+                    <table class="table table-sm borderless">
+                        <col width="20%">
+                        <col width="80%">
+                        <tr><td>Relationship Status</td><td>{{ object.profile.get_relationship_display }}</td></tr>
+                        <tr><td>Lives in</td><td>{{ object.profile.lives_in }}</td></tr>
+                        <tr><td>Hometown</td><td>{{ object.profile.hometown }}</td></tr>
+                    </table>
+                </div>
             </div>
         </div>
-    </div>
     {% endif %}
 {% endblock %}
+
+{% block left-sidebar %}
+    {% if object not in request.user.get_blocked_users %}
+        {% include 'connections/snippets/connections.html' %}
+    {% endif %}
+{% endblock %}
+
+{% block main %}
+    {% if object not in request.user.get_blocked_users %}
+        {% include 'feeds/post.html' with posts=object.get_posts redirect_to='profile' %}
+    {% endif %}
+{% endblock %}
+
+{% block right-sidebar %}
+    {% include 'activityfeeds/recents.html' %}
+{% endblock %}
+

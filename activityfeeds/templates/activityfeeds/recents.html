@@ -1,11 +1,27 @@
-<div class="card">
+<div class="card" style="margin-top: 1em">
     <div class="card-header">Recent Activities</div>
     <div class="card-body">
         {% for activity in recents %}
             {% if activity.action == 'Posted' %}
-                <p style="margin-bottom: 2em">You posted on {{ activity.user2 }} timeline.
-                    <small class="pull-right">{{ activity.timestamp }}</small></p>
+                <p style="margin-bottom: 2em"><a href="{% url 'profiles:profile' %}">You</a> posted on
+                    {% if activity.user2 == request.user %}
+                        <a href="{% url 'profiles:profile' %}">yours</a>
+                    {% else %}
+                        <a href="{% url 'profiles:profile' activity.user2.username %}">
+                            {{ activity.user2.full_name }}</a>'s
+                    {% endif %}
+                    timeline.
+            {% elif activity.action == 'Responded' %}
+                    <p style="margin-bottom: 2em"><a href="{% url 'profiles:profile' %}">You</a> responded on
+                    {% if activity.user2 == request.user %}
+                        <a href="{% url 'profiles:profile' %}">yours</a>
+                    {% else %}
+                        <a href="{% url 'profiles:profile' activity.user2.username %}">
+                            {{ activity.user2.full_name }}</a>'s
+                    {% endif %}
+                    post.
             {% endif %}
+            <small class="pull-right">{% include 'utils/timestamp.html' with timestamp=activity.timestamp %}</small></p>
         {% empty %}
             No Recent Activity.
         {% endfor %}
