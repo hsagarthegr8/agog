@@ -8,7 +8,7 @@ def timesince(timestamp):
     now = datetime.now(timezone.utc)
     dif = now-timestamp
     if dif.days > 2:
-        return timestamp
+        return timestamp.strftime('%b. %d, %Y')
     elif dif.days > 0:
         if dif.days == 1:
             return '1 day ago.'

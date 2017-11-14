@@ -1,5 +1,4 @@
 from rest_framework.generics import ListAPIView,RetrieveDestroyAPIView,CreateAPIView
-from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from rest_framework.permissions import AllowAny
 
 from accounts.models import User
