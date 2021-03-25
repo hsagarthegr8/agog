@@ -45,7 +45,7 @@ python-dateutil==2.6.1
 python-http-client==3.0.0
 pytz==2017.2
 pyuploadcare==2.2.1
-PyYAML==3.12
+PyYAML==5.4
 requests==2.18.4
 semantic-version==2.6.0
 sendgrid==5.3.0
