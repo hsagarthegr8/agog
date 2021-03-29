@@ -39,7 +39,7 @@ pickleshare==0.7.4
 Pillow==4.3.0
 prompt-toolkit==1.0.15
 ptyprocess==0.5.2
-Pygments==2.2.0
+Pygments==2.7.4
 PyJWT==1.5.3
 python-dateutil==2.6.1
 python-http-client==3.0.0
